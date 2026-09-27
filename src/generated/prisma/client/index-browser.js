@@ -178,6 +178,42 @@ exports.Prisma.OrderScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ShipmentScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  carrier: 'carrier',
+  trackingNumber: 'trackingNumber',
+  pickupLocation: 'pickupLocation',
+  deliveryLocation: 'deliveryLocation',
+  currentLocation: 'currentLocation',
+  status: 'status',
+  estimatedDelivery: 'estimatedDelivery',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TrackingEventScalarFieldEnum = {
+  id: 'id',
+  shipmentId: 'shipmentId',
+  status: 'status',
+  location: 'location',
+  description: 'description',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  uploadedBy: 'uploadedBy',
+  documentType: 'documentType',
+  fileName: 'fileName',
+  cid: 'cid',
+  ipfsUri: 'ipfsUri',
+  createdAt: 'createdAt',
+  produceId: 'produceId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -225,12 +261,34 @@ exports.OrderStatus = exports.$Enums.OrderStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.ShipmentStatus = exports.$Enums.ShipmentStatus = {
+  CREATED: 'CREATED',
+  PICKED_UP: 'PICKED_UP',
+  IN_TRANSIT: 'IN_TRANSIT',
+  AT_HUB: 'AT_HUB',
+  OUT_FOR_DELIVERY: 'OUT_FOR_DELIVERY',
+  DELIVERED: 'DELIVERED',
+  DELAYED: 'DELAYED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.CertificateType = exports.$Enums.CertificateType = {
+  QUALITY: 'QUALITY',
+  ORGANIC: 'ORGANIC',
+  FARMER_CERTIFICATE: 'FARMER_CERTIFICATE',
+  LAB_REPORT: 'LAB_REPORT',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Produce: 'Produce',
   Listing: 'Listing',
   Offer: 'Offer',
-  Order: 'Order'
+  Order: 'Order',
+  Shipment: 'Shipment',
+  TrackingEvent: 'TrackingEvent',
+  Certificate: 'Certificate'
 };
 
 /**

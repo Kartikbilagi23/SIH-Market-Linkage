@@ -32,12 +32,31 @@ enum OfferStatus {
   CANCELLED
 }
 
+enum ShipmentStatus {
+  CREATED
+  PICKED_UP
+  IN_TRANSIT
+  AT_HUB
+  OUT_FOR_DELIVERY
+  DELIVERED
+  DELAYED
+  CANCELLED
+}
+
 enum OrderStatus {
   CONFIRMED
   PROCESSING
   SHIPPED
   DELIVERED
   CANCELLED
+}
+
+enum CertificateType {
+  QUALITY
+  ORGANIC
+  FARMER_CERTIFICATE
+  LAB_REPORT
+  OTHER
 }
 
 model User {
@@ -65,8 +84,9 @@ model Produce {
   quality     String?
   harvestDate DateTime?
 
-  farmer  User     @relation(fields: [farmerId], references: [id], onDelete: Cascade)
-  listing Listing?
+  farmer      User          @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  listing     Listing?
+  certificate Certificate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -125,6 +145,7 @@ model Order {
   quantity    Float
   agreedPrice Float
   totalAmount Float
+  shipment    Shipment?
 
   status OrderStatus @default(CONFIRMED)
 
@@ -140,4 +161,70 @@ model Order {
   @@index([farmerId])
   @@index([listingId])
   @@index([status])
+}
+
+model Shipment {
+  id String @id @default(cuid())
+
+  orderId String @unique
+
+  carrier        String?
+  trackingNumber String  @unique
+
+  pickupLocation   String
+  deliveryLocation String
+
+  currentLocation String?
+  status          ShipmentStatus @default(CREATED)
+
+  estimatedDelivery DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order          Order           @relation(fields: [orderId], references: [id])
+  trackingEvents TrackingEvent[]
+
+  @@index([status])
+}
+
+model TrackingEvent {
+  id String @id @default(cuid())
+
+  shipmentId String
+
+  status      ShipmentStatus
+  location    String
+  description String?
+
+  latitude  Float?
+  longitude Float?
+
+  createdAt DateTime @default(now())
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([shipmentId])
+  @@index([createdAt])
+}
+
+model Certificate {
+  id String @id @default(cuid())
+
+  uploadedBy String
+
+  documentType CertificateType
+  fileName     String
+
+  cid     String
+  ipfsUri String
+
+  createdAt DateTime @default(now())
+
+  produceId String
+
+  produce Produce @relation(fields: [produceId], references: [id], onDelete: Cascade)
+
+  @@index([produceId])
+  @@index([cid])
 }

@@ -5,6 +5,8 @@ import authroute from "./routes/auth.routes";
 import produceRoute from "./routes/produce.routes"
 import listingRoute from "./routes/listing.routes";
 import offerRoutes from "./routes/offer.routes";
+import orderRoutes from "./routes/order.routes";
+import shipmentRoutes from "./routes/shipment.routes";
 
 
 dotenv.config();
@@ -15,7 +17,9 @@ app.use(express.json());
 app.use("/api/auth",authroute);
 
 app.use("/api/produce",produceRoute);
-app.use("/api/offers",offerRoutes)
+app.use("/api/offers",offerRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/shipments",shipmentRoutes);
 
 app.get("/api/health",(req,res)=>{
     res.status(200).json({

@@ -1,26 +1,34 @@
 import { Router } from "express";
+
 import {
-    getMine,
-    getReceived,
-} from "../controllers/order.controller";
+    create,
+    getOne,
+    addEvent,
+} from "../controllers/shipment.controller";
 
 import { authenticate } from "../middleware/auth.middleware";
 import { authorize } from "../middleware/role.middleware";
 
 const router = Router();
 
-router.get(
-    "/my",
+router.post(
+    "/",
     authenticate,
-    authorize("BUYER"),
-    getMine
+    authorize("FARMER"),
+    create
 );
 
 router.get(
-    "/received",
+    "/:id",
+    authenticate,
+    getOne
+);
+
+router.post(
+    "/:id/events",
     authenticate,
     authorize("FARMER"),
-    getReceived
+    addEvent
 );
 
 export default router;

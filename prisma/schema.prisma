@@ -32,6 +32,17 @@ enum OfferStatus {
   CANCELLED
 }
 
+enum ShipmentStatus {
+  CREATED
+  PICKED_UP
+  IN_TRANSIT
+  AT_HUB
+  OUT_FOR_DELIVERY
+  DELIVERED
+  DELAYED
+  CANCELLED
+}
+
 enum OrderStatus {
   CONFIRMED
   PROCESSING
@@ -40,6 +51,13 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum CertificateType {
+  QUALITY
+  ORGANIC
+  FARMER_CERTIFICATE
+  LAB_REPORT
+  OTHER
+}
 
 model User {
   id           String   @id @default(cuid())
@@ -48,10 +66,10 @@ model User {
   passwordHash String
   role         UserRole
 
-  produce Produce[]
-  offers  Offer[]
-  buyerOrders  Order[] @relation("BuyerOrders")
-  farmerOrders Order[] @relation("FarmerOrders")
+  produce      Produce[]
+  offers       Offer[]
+  buyerOrders  Order[]   @relation("BuyerOrders")
+  farmerOrders Order[]   @relation("FarmerOrders")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,8 +84,9 @@ model Produce {
   quality     String?
   harvestDate DateTime?
 
-  farmer  User     @relation(fields: [farmerId], references: [id], onDelete: Cascade)
-  listing Listing?
+  farmer      User          @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  listing     Listing?
+  certificate Certificate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -116,29 +135,96 @@ model Offer {
 }
 
 model Order {
-  id            String      @id @default(cuid())
+  id String @id @default(cuid())
 
-  offerId       String      @unique
-  listingId     String
-  buyerId       String
-  farmerId      String
+  offerId   String @unique
+  listingId String
+  buyerId   String
+  farmerId  String
 
-  quantity      Float
-  agreedPrice   Float
-  totalAmount   Float
+  quantity    Float
+  agreedPrice Float
+  totalAmount Float
+  shipment    Shipment?
 
-  status        OrderStatus @default(CONFIRMED)
+  status OrderStatus @default(CONFIRMED)
 
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  offer         Offer       @relation(fields: [offerId], references: [id])
-  listing       Listing     @relation(fields: [listingId], references: [id])
-  buyer         User        @relation("BuyerOrders", fields: [buyerId], references: [id])
-  farmer        User        @relation("FarmerOrders", fields: [farmerId], references: [id])
+  offer   Offer   @relation(fields: [offerId], references: [id])
+  listing Listing @relation(fields: [listingId], references: [id])
+  buyer   User    @relation("BuyerOrders", fields: [buyerId], references: [id])
+  farmer  User    @relation("FarmerOrders", fields: [farmerId], references: [id])
 
   @@index([buyerId])
   @@index([farmerId])
   @@index([listingId])
   @@index([status])
+}
+
+model Shipment {
+  id String @id @default(cuid())
+
+  orderId String @unique
+
+  carrier        String?
+  trackingNumber String  @unique
+
+  pickupLocation   String
+  deliveryLocation String
+
+  currentLocation String?
+  status          ShipmentStatus @default(CREATED)
+
+  estimatedDelivery DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order          Order           @relation(fields: [orderId], references: [id])
+  trackingEvents TrackingEvent[]
+
+  @@index([status])
+}
+
+model TrackingEvent {
+  id String @id @default(cuid())
+
+  shipmentId String
+
+  status      ShipmentStatus
+  location    String
+  description String?
+
+  latitude  Float?
+  longitude Float?
+
+  createdAt DateTime @default(now())
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([shipmentId])
+  @@index([createdAt])
+}
+
+model Certificate {
+  id String @id @default(cuid())
+
+  uploadedBy String
+
+  documentType CertificateType
+  fileName     String
+
+  cid     String
+  ipfsUri String
+
+  createdAt DateTime @default(now())
+
+  produceId String
+
+  produce Produce @relation(fields: [produceId], references: [id], onDelete: Cascade)
+
+  @@index([produceId])
+  @@index([cid])
 }

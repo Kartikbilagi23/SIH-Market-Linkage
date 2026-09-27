@@ -38,6 +38,21 @@ export type Offer = $Result.DefaultSelection<Prisma.$OfferPayload>
  * 
  */
 export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
+/**
+ * Model Shipment
+ * 
+ */
+export type Shipment = $Result.DefaultSelection<Prisma.$ShipmentPayload>
+/**
+ * Model TrackingEvent
+ * 
+ */
+export type TrackingEvent = $Result.DefaultSelection<Prisma.$TrackingEventPayload>
+/**
+ * Model Certificate
+ * 
+ */
+export type Certificate = $Result.DefaultSelection<Prisma.$CertificatePayload>
 
 /**
  * Enums
@@ -80,6 +95,20 @@ export const OfferStatus: {
 export type OfferStatus = (typeof OfferStatus)[keyof typeof OfferStatus]
 
 
+export const ShipmentStatus: {
+  CREATED: 'CREATED',
+  PICKED_UP: 'PICKED_UP',
+  IN_TRANSIT: 'IN_TRANSIT',
+  AT_HUB: 'AT_HUB',
+  OUT_FOR_DELIVERY: 'OUT_FOR_DELIVERY',
+  DELIVERED: 'DELIVERED',
+  DELAYED: 'DELAYED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type ShipmentStatus = (typeof ShipmentStatus)[keyof typeof ShipmentStatus]
+
+
 export const OrderStatus: {
   CONFIRMED: 'CONFIRMED',
   PROCESSING: 'PROCESSING',
@@ -89,6 +118,17 @@ export const OrderStatus: {
 };
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const CertificateType: {
+  QUALITY: 'QUALITY',
+  ORGANIC: 'ORGANIC',
+  FARMER_CERTIFICATE: 'FARMER_CERTIFICATE',
+  LAB_REPORT: 'LAB_REPORT',
+  OTHER: 'OTHER'
+};
+
+export type CertificateType = (typeof CertificateType)[keyof typeof CertificateType]
 
 }
 
@@ -108,9 +148,17 @@ export type OfferStatus = $Enums.OfferStatus
 
 export const OfferStatus: typeof $Enums.OfferStatus
 
+export type ShipmentStatus = $Enums.ShipmentStatus
+
+export const ShipmentStatus: typeof $Enums.ShipmentStatus
+
 export type OrderStatus = $Enums.OrderStatus
 
 export const OrderStatus: typeof $Enums.OrderStatus
+
+export type CertificateType = $Enums.CertificateType
+
+export const CertificateType: typeof $Enums.CertificateType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -282,6 +330,36 @@ export class PrismaClient<
     * ```
     */
   get order(): Prisma.OrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.shipment`: Exposes CRUD operations for the **Shipment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Shipments
+    * const shipments = await prisma.shipment.findMany()
+    * ```
+    */
+  get shipment(): Prisma.ShipmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.trackingEvent`: Exposes CRUD operations for the **TrackingEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackingEvents
+    * const trackingEvents = await prisma.trackingEvent.findMany()
+    * ```
+    */
+  get trackingEvent(): Prisma.TrackingEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.certificate`: Exposes CRUD operations for the **Certificate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Certificates
+    * const certificates = await prisma.certificate.findMany()
+    * ```
+    */
+  get certificate(): Prisma.CertificateDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -733,7 +811,10 @@ export namespace Prisma {
     Produce: 'Produce',
     Listing: 'Listing',
     Offer: 'Offer',
-    Order: 'Order'
+    Order: 'Order',
+    Shipment: 'Shipment',
+    TrackingEvent: 'TrackingEvent',
+    Certificate: 'Certificate'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -749,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "produce" | "listing" | "offer" | "order"
+      modelProps: "user" | "produce" | "listing" | "offer" | "order" | "shipment" | "trackingEvent" | "certificate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1123,6 +1204,228 @@ export namespace Prisma {
           }
         }
       }
+      Shipment: {
+        payload: Prisma.$ShipmentPayload<ExtArgs>
+        fields: Prisma.ShipmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ShipmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ShipmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          findFirst: {
+            args: Prisma.ShipmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ShipmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          findMany: {
+            args: Prisma.ShipmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+          }
+          create: {
+            args: Prisma.ShipmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          createMany: {
+            args: Prisma.ShipmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ShipmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+          }
+          delete: {
+            args: Prisma.ShipmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          update: {
+            args: Prisma.ShipmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.ShipmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ShipmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ShipmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.ShipmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ShipmentPayload>
+          }
+          aggregate: {
+            args: Prisma.ShipmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateShipment>
+          }
+          groupBy: {
+            args: Prisma.ShipmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ShipmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ShipmentCountArgs<ExtArgs>
+            result: $Utils.Optional<ShipmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      TrackingEvent: {
+        payload: Prisma.$TrackingEventPayload<ExtArgs>
+        fields: Prisma.TrackingEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TrackingEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TrackingEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          findFirst: {
+            args: Prisma.TrackingEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TrackingEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          findMany: {
+            args: Prisma.TrackingEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+          }
+          create: {
+            args: Prisma.TrackingEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          createMany: {
+            args: Prisma.TrackingEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TrackingEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+          }
+          delete: {
+            args: Prisma.TrackingEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          update: {
+            args: Prisma.TrackingEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.TrackingEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TrackingEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TrackingEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.TrackingEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+          }
+          aggregate: {
+            args: Prisma.TrackingEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTrackingEvent>
+          }
+          groupBy: {
+            args: Prisma.TrackingEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TrackingEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TrackingEventCountArgs<ExtArgs>
+            result: $Utils.Optional<TrackingEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      Certificate: {
+        payload: Prisma.$CertificatePayload<ExtArgs>
+        fields: Prisma.CertificateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CertificateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CertificateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findFirst: {
+            args: Prisma.CertificateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CertificateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findMany: {
+            args: Prisma.CertificateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          create: {
+            args: Prisma.CertificateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          createMany: {
+            args: Prisma.CertificateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CertificateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          delete: {
+            args: Prisma.CertificateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          update: {
+            args: Prisma.CertificateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          deleteMany: {
+            args: Prisma.CertificateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CertificateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CertificateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          upsert: {
+            args: Prisma.CertificateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          aggregate: {
+            args: Prisma.CertificateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCertificate>
+          }
+          groupBy: {
+            args: Prisma.CertificateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CertificateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CertificateCountArgs<ExtArgs>
+            result: $Utils.Optional<CertificateCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1251,6 +1554,9 @@ export namespace Prisma {
     listing?: ListingOmit
     offer?: OfferOmit
     order?: OrderOmit
+    shipment?: ShipmentOmit
+    trackingEvent?: TrackingEventOmit
+    certificate?: CertificateOmit
   }
 
   /* Types for Logging */
@@ -1385,6 +1691,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ProduceCountOutputType
+   */
+
+  export type ProduceCountOutputType = {
+    certificate: number
+  }
+
+  export type ProduceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    certificate?: boolean | ProduceCountOutputTypeCountCertificateArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProduceCountOutputType without action
+   */
+  export type ProduceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProduceCountOutputType
+     */
+    select?: ProduceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProduceCountOutputType without action
+   */
+  export type ProduceCountOutputTypeCountCertificateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+  }
+
+
+  /**
    * Count Type ListingCountOutputType
    */
 
@@ -1421,6 +1758,37 @@ export namespace Prisma {
    */
   export type ListingCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
+  }
+
+
+  /**
+   * Count Type ShipmentCountOutputType
+   */
+
+  export type ShipmentCountOutputType = {
+    trackingEvents: number
+  }
+
+  export type ShipmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trackingEvents?: boolean | ShipmentCountOutputTypeCountTrackingEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ShipmentCountOutputType without action
+   */
+  export type ShipmentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShipmentCountOutputType
+     */
+    select?: ShipmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ShipmentCountOutputType without action
+   */
+  export type ShipmentCountOutputTypeCountTrackingEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrackingEventWhereInput
   }
 
 
@@ -2845,6 +3213,8 @@ export namespace Prisma {
     updatedAt?: boolean
     farmer?: boolean | UserDefaultArgs<ExtArgs>
     listing?: boolean | Produce$listingArgs<ExtArgs>
+    certificate?: boolean | Produce$certificateArgs<ExtArgs>
+    _count?: boolean | ProduceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produce"]>
 
   export type ProduceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2889,6 +3259,8 @@ export namespace Prisma {
   export type ProduceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     farmer?: boolean | UserDefaultArgs<ExtArgs>
     listing?: boolean | Produce$listingArgs<ExtArgs>
+    certificate?: boolean | Produce$certificateArgs<ExtArgs>
+    _count?: boolean | ProduceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProduceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     farmer?: boolean | UserDefaultArgs<ExtArgs>
@@ -2902,6 +3274,7 @@ export namespace Prisma {
     objects: {
       farmer: Prisma.$UserPayload<ExtArgs>
       listing: Prisma.$ListingPayload<ExtArgs> | null
+      certificate: Prisma.$CertificatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3309,6 +3682,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     farmer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     listing<T extends Produce$listingArgs<ExtArgs> = {}>(args?: Subset<T, Produce$listingArgs<ExtArgs>>): Prisma__ListingClient<$Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    certificate<T extends Produce$certificateArgs<ExtArgs> = {}>(args?: Subset<T, Produce$certificateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3764,6 +4138,30 @@ export namespace Prisma {
      */
     include?: ListingInclude<ExtArgs> | null
     where?: ListingWhereInput
+  }
+
+  /**
+   * Produce.certificate
+   */
+  export type Produce$certificateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    cursor?: CertificateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
   }
 
   /**
@@ -6408,6 +6806,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    shipment?: boolean | Order$shipmentArgs<ExtArgs>
     offer?: boolean | OfferDefaultArgs<ExtArgs>
     listing?: boolean | ListingDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
@@ -6466,6 +6865,7 @@ export namespace Prisma {
 
   export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "offerId" | "listingId" | "buyerId" | "farmerId" | "quantity" | "agreedPrice" | "totalAmount" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    shipment?: boolean | Order$shipmentArgs<ExtArgs>
     offer?: boolean | OfferDefaultArgs<ExtArgs>
     listing?: boolean | ListingDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
@@ -6487,6 +6887,7 @@ export namespace Prisma {
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
+      shipment: Prisma.$ShipmentPayload<ExtArgs> | null
       offer: Prisma.$OfferPayload<ExtArgs>
       listing: Prisma.$ListingPayload<ExtArgs>
       buyer: Prisma.$UserPayload<ExtArgs>
@@ -6898,6 +7299,7 @@ export namespace Prisma {
    */
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    shipment<T extends Order$shipmentArgs<ExtArgs> = {}>(args?: Subset<T, Order$shipmentArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     offer<T extends OfferDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OfferDefaultArgs<ExtArgs>>): Prisma__OfferClient<$Result.GetResult<Prisma.$OfferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     listing<T extends ListingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ListingDefaultArgs<ExtArgs>>): Prisma__ListingClient<$Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     buyer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -7343,6 +7745,25 @@ export namespace Prisma {
   }
 
   /**
+   * Order.shipment
+   */
+  export type Order$shipmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    where?: ShipmentWhereInput
+  }
+
+  /**
    * Order without action
    */
   export type OrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7358,6 +7779,3419 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OrderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Shipment
+   */
+
+  export type AggregateShipment = {
+    _count: ShipmentCountAggregateOutputType | null
+    _min: ShipmentMinAggregateOutputType | null
+    _max: ShipmentMaxAggregateOutputType | null
+  }
+
+  export type ShipmentMinAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    carrier: string | null
+    trackingNumber: string | null
+    pickupLocation: string | null
+    deliveryLocation: string | null
+    currentLocation: string | null
+    status: $Enums.ShipmentStatus | null
+    estimatedDelivery: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ShipmentMaxAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    carrier: string | null
+    trackingNumber: string | null
+    pickupLocation: string | null
+    deliveryLocation: string | null
+    currentLocation: string | null
+    status: $Enums.ShipmentStatus | null
+    estimatedDelivery: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ShipmentCountAggregateOutputType = {
+    id: number
+    orderId: number
+    carrier: number
+    trackingNumber: number
+    pickupLocation: number
+    deliveryLocation: number
+    currentLocation: number
+    status: number
+    estimatedDelivery: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ShipmentMinAggregateInputType = {
+    id?: true
+    orderId?: true
+    carrier?: true
+    trackingNumber?: true
+    pickupLocation?: true
+    deliveryLocation?: true
+    currentLocation?: true
+    status?: true
+    estimatedDelivery?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ShipmentMaxAggregateInputType = {
+    id?: true
+    orderId?: true
+    carrier?: true
+    trackingNumber?: true
+    pickupLocation?: true
+    deliveryLocation?: true
+    currentLocation?: true
+    status?: true
+    estimatedDelivery?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ShipmentCountAggregateInputType = {
+    id?: true
+    orderId?: true
+    carrier?: true
+    trackingNumber?: true
+    pickupLocation?: true
+    deliveryLocation?: true
+    currentLocation?: true
+    status?: true
+    estimatedDelivery?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ShipmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Shipment to aggregate.
+     */
+    where?: ShipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Shipments to fetch.
+     */
+    orderBy?: ShipmentOrderByWithRelationInput | ShipmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ShipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Shipments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Shipments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Shipments
+    **/
+    _count?: true | ShipmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ShipmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ShipmentMaxAggregateInputType
+  }
+
+  export type GetShipmentAggregateType<T extends ShipmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateShipment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateShipment[P]>
+      : GetScalarType<T[P], AggregateShipment[P]>
+  }
+
+
+
+
+  export type ShipmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ShipmentWhereInput
+    orderBy?: ShipmentOrderByWithAggregationInput | ShipmentOrderByWithAggregationInput[]
+    by: ShipmentScalarFieldEnum[] | ShipmentScalarFieldEnum
+    having?: ShipmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ShipmentCountAggregateInputType | true
+    _min?: ShipmentMinAggregateInputType
+    _max?: ShipmentMaxAggregateInputType
+  }
+
+  export type ShipmentGroupByOutputType = {
+    id: string
+    orderId: string
+    carrier: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation: string | null
+    status: $Enums.ShipmentStatus
+    estimatedDelivery: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ShipmentCountAggregateOutputType | null
+    _min: ShipmentMinAggregateOutputType | null
+    _max: ShipmentMaxAggregateOutputType | null
+  }
+
+  type GetShipmentGroupByPayload<T extends ShipmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ShipmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ShipmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ShipmentGroupByOutputType[P]>
+            : GetScalarType<T[P], ShipmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ShipmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    carrier?: boolean
+    trackingNumber?: boolean
+    pickupLocation?: boolean
+    deliveryLocation?: boolean
+    currentLocation?: boolean
+    status?: boolean
+    estimatedDelivery?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+    trackingEvents?: boolean | Shipment$trackingEventsArgs<ExtArgs>
+    _count?: boolean | ShipmentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["shipment"]>
+
+  export type ShipmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    carrier?: boolean
+    trackingNumber?: boolean
+    pickupLocation?: boolean
+    deliveryLocation?: boolean
+    currentLocation?: boolean
+    status?: boolean
+    estimatedDelivery?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["shipment"]>
+
+  export type ShipmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    carrier?: boolean
+    trackingNumber?: boolean
+    pickupLocation?: boolean
+    deliveryLocation?: boolean
+    currentLocation?: boolean
+    status?: boolean
+    estimatedDelivery?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["shipment"]>
+
+  export type ShipmentSelectScalar = {
+    id?: boolean
+    orderId?: boolean
+    carrier?: boolean
+    trackingNumber?: boolean
+    pickupLocation?: boolean
+    deliveryLocation?: boolean
+    currentLocation?: boolean
+    status?: boolean
+    estimatedDelivery?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ShipmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "carrier" | "trackingNumber" | "pickupLocation" | "deliveryLocation" | "currentLocation" | "status" | "estimatedDelivery" | "createdAt" | "updatedAt", ExtArgs["result"]["shipment"]>
+  export type ShipmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+    trackingEvents?: boolean | Shipment$trackingEventsArgs<ExtArgs>
+    _count?: boolean | ShipmentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ShipmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }
+  export type ShipmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | OrderDefaultArgs<ExtArgs>
+  }
+
+  export type $ShipmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Shipment"
+    objects: {
+      order: Prisma.$OrderPayload<ExtArgs>
+      trackingEvents: Prisma.$TrackingEventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      orderId: string
+      carrier: string | null
+      trackingNumber: string
+      pickupLocation: string
+      deliveryLocation: string
+      currentLocation: string | null
+      status: $Enums.ShipmentStatus
+      estimatedDelivery: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["shipment"]>
+    composites: {}
+  }
+
+  type ShipmentGetPayload<S extends boolean | null | undefined | ShipmentDefaultArgs> = $Result.GetResult<Prisma.$ShipmentPayload, S>
+
+  type ShipmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ShipmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ShipmentCountAggregateInputType | true
+    }
+
+  export interface ShipmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Shipment'], meta: { name: 'Shipment' } }
+    /**
+     * Find zero or one Shipment that matches the filter.
+     * @param {ShipmentFindUniqueArgs} args - Arguments to find a Shipment
+     * @example
+     * // Get one Shipment
+     * const shipment = await prisma.shipment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ShipmentFindUniqueArgs>(args: SelectSubset<T, ShipmentFindUniqueArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Shipment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ShipmentFindUniqueOrThrowArgs} args - Arguments to find a Shipment
+     * @example
+     * // Get one Shipment
+     * const shipment = await prisma.shipment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ShipmentFindUniqueOrThrowArgs>(args: SelectSubset<T, ShipmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Shipment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentFindFirstArgs} args - Arguments to find a Shipment
+     * @example
+     * // Get one Shipment
+     * const shipment = await prisma.shipment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ShipmentFindFirstArgs>(args?: SelectSubset<T, ShipmentFindFirstArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Shipment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentFindFirstOrThrowArgs} args - Arguments to find a Shipment
+     * @example
+     * // Get one Shipment
+     * const shipment = await prisma.shipment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ShipmentFindFirstOrThrowArgs>(args?: SelectSubset<T, ShipmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Shipments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Shipments
+     * const shipments = await prisma.shipment.findMany()
+     * 
+     * // Get first 10 Shipments
+     * const shipments = await prisma.shipment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const shipmentWithIdOnly = await prisma.shipment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ShipmentFindManyArgs>(args?: SelectSubset<T, ShipmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Shipment.
+     * @param {ShipmentCreateArgs} args - Arguments to create a Shipment.
+     * @example
+     * // Create one Shipment
+     * const Shipment = await prisma.shipment.create({
+     *   data: {
+     *     // ... data to create a Shipment
+     *   }
+     * })
+     * 
+     */
+    create<T extends ShipmentCreateArgs>(args: SelectSubset<T, ShipmentCreateArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Shipments.
+     * @param {ShipmentCreateManyArgs} args - Arguments to create many Shipments.
+     * @example
+     * // Create many Shipments
+     * const shipment = await prisma.shipment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ShipmentCreateManyArgs>(args?: SelectSubset<T, ShipmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Shipments and returns the data saved in the database.
+     * @param {ShipmentCreateManyAndReturnArgs} args - Arguments to create many Shipments.
+     * @example
+     * // Create many Shipments
+     * const shipment = await prisma.shipment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Shipments and only return the `id`
+     * const shipmentWithIdOnly = await prisma.shipment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ShipmentCreateManyAndReturnArgs>(args?: SelectSubset<T, ShipmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Shipment.
+     * @param {ShipmentDeleteArgs} args - Arguments to delete one Shipment.
+     * @example
+     * // Delete one Shipment
+     * const Shipment = await prisma.shipment.delete({
+     *   where: {
+     *     // ... filter to delete one Shipment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ShipmentDeleteArgs>(args: SelectSubset<T, ShipmentDeleteArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Shipment.
+     * @param {ShipmentUpdateArgs} args - Arguments to update one Shipment.
+     * @example
+     * // Update one Shipment
+     * const shipment = await prisma.shipment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ShipmentUpdateArgs>(args: SelectSubset<T, ShipmentUpdateArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Shipments.
+     * @param {ShipmentDeleteManyArgs} args - Arguments to filter Shipments to delete.
+     * @example
+     * // Delete a few Shipments
+     * const { count } = await prisma.shipment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ShipmentDeleteManyArgs>(args?: SelectSubset<T, ShipmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Shipments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Shipments
+     * const shipment = await prisma.shipment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ShipmentUpdateManyArgs>(args: SelectSubset<T, ShipmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Shipments and returns the data updated in the database.
+     * @param {ShipmentUpdateManyAndReturnArgs} args - Arguments to update many Shipments.
+     * @example
+     * // Update many Shipments
+     * const shipment = await prisma.shipment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Shipments and only return the `id`
+     * const shipmentWithIdOnly = await prisma.shipment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ShipmentUpdateManyAndReturnArgs>(args: SelectSubset<T, ShipmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Shipment.
+     * @param {ShipmentUpsertArgs} args - Arguments to update or create a Shipment.
+     * @example
+     * // Update or create a Shipment
+     * const shipment = await prisma.shipment.upsert({
+     *   create: {
+     *     // ... data to create a Shipment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Shipment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ShipmentUpsertArgs>(args: SelectSubset<T, ShipmentUpsertArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Shipments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentCountArgs} args - Arguments to filter Shipments to count.
+     * @example
+     * // Count the number of Shipments
+     * const count = await prisma.shipment.count({
+     *   where: {
+     *     // ... the filter for the Shipments we want to count
+     *   }
+     * })
+    **/
+    count<T extends ShipmentCountArgs>(
+      args?: Subset<T, ShipmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ShipmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Shipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ShipmentAggregateArgs>(args: Subset<T, ShipmentAggregateArgs>): Prisma.PrismaPromise<GetShipmentAggregateType<T>>
+
+    /**
+     * Group by Shipment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ShipmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ShipmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ShipmentGroupByArgs['orderBy'] }
+        : { orderBy?: ShipmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ShipmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShipmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Shipment model
+   */
+  readonly fields: ShipmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Shipment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ShipmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    trackingEvents<T extends Shipment$trackingEventsArgs<ExtArgs> = {}>(args?: Subset<T, Shipment$trackingEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Shipment model
+   */
+  interface ShipmentFieldRefs {
+    readonly id: FieldRef<"Shipment", 'String'>
+    readonly orderId: FieldRef<"Shipment", 'String'>
+    readonly carrier: FieldRef<"Shipment", 'String'>
+    readonly trackingNumber: FieldRef<"Shipment", 'String'>
+    readonly pickupLocation: FieldRef<"Shipment", 'String'>
+    readonly deliveryLocation: FieldRef<"Shipment", 'String'>
+    readonly currentLocation: FieldRef<"Shipment", 'String'>
+    readonly status: FieldRef<"Shipment", 'ShipmentStatus'>
+    readonly estimatedDelivery: FieldRef<"Shipment", 'DateTime'>
+    readonly createdAt: FieldRef<"Shipment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Shipment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Shipment findUnique
+   */
+  export type ShipmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Shipment to fetch.
+     */
+    where: ShipmentWhereUniqueInput
+  }
+
+  /**
+   * Shipment findUniqueOrThrow
+   */
+  export type ShipmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Shipment to fetch.
+     */
+    where: ShipmentWhereUniqueInput
+  }
+
+  /**
+   * Shipment findFirst
+   */
+  export type ShipmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Shipment to fetch.
+     */
+    where?: ShipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Shipments to fetch.
+     */
+    orderBy?: ShipmentOrderByWithRelationInput | ShipmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Shipments.
+     */
+    cursor?: ShipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Shipments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Shipments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Shipments.
+     */
+    distinct?: ShipmentScalarFieldEnum | ShipmentScalarFieldEnum[]
+  }
+
+  /**
+   * Shipment findFirstOrThrow
+   */
+  export type ShipmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Shipment to fetch.
+     */
+    where?: ShipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Shipments to fetch.
+     */
+    orderBy?: ShipmentOrderByWithRelationInput | ShipmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Shipments.
+     */
+    cursor?: ShipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Shipments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Shipments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Shipments.
+     */
+    distinct?: ShipmentScalarFieldEnum | ShipmentScalarFieldEnum[]
+  }
+
+  /**
+   * Shipment findMany
+   */
+  export type ShipmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Shipments to fetch.
+     */
+    where?: ShipmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Shipments to fetch.
+     */
+    orderBy?: ShipmentOrderByWithRelationInput | ShipmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Shipments.
+     */
+    cursor?: ShipmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Shipments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Shipments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Shipments.
+     */
+    distinct?: ShipmentScalarFieldEnum | ShipmentScalarFieldEnum[]
+  }
+
+  /**
+   * Shipment create
+   */
+  export type ShipmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Shipment.
+     */
+    data: XOR<ShipmentCreateInput, ShipmentUncheckedCreateInput>
+  }
+
+  /**
+   * Shipment createMany
+   */
+  export type ShipmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Shipments.
+     */
+    data: ShipmentCreateManyInput | ShipmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Shipment createManyAndReturn
+   */
+  export type ShipmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Shipments.
+     */
+    data: ShipmentCreateManyInput | ShipmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Shipment update
+   */
+  export type ShipmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Shipment.
+     */
+    data: XOR<ShipmentUpdateInput, ShipmentUncheckedUpdateInput>
+    /**
+     * Choose, which Shipment to update.
+     */
+    where: ShipmentWhereUniqueInput
+  }
+
+  /**
+   * Shipment updateMany
+   */
+  export type ShipmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Shipments.
+     */
+    data: XOR<ShipmentUpdateManyMutationInput, ShipmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Shipments to update
+     */
+    where?: ShipmentWhereInput
+    /**
+     * Limit how many Shipments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Shipment updateManyAndReturn
+   */
+  export type ShipmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * The data used to update Shipments.
+     */
+    data: XOR<ShipmentUpdateManyMutationInput, ShipmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Shipments to update
+     */
+    where?: ShipmentWhereInput
+    /**
+     * Limit how many Shipments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Shipment upsert
+   */
+  export type ShipmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Shipment to update in case it exists.
+     */
+    where: ShipmentWhereUniqueInput
+    /**
+     * In case the Shipment found by the `where` argument doesn't exist, create a new Shipment with this data.
+     */
+    create: XOR<ShipmentCreateInput, ShipmentUncheckedCreateInput>
+    /**
+     * In case the Shipment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ShipmentUpdateInput, ShipmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Shipment delete
+   */
+  export type ShipmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+    /**
+     * Filter which Shipment to delete.
+     */
+    where: ShipmentWhereUniqueInput
+  }
+
+  /**
+   * Shipment deleteMany
+   */
+  export type ShipmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Shipments to delete
+     */
+    where?: ShipmentWhereInput
+    /**
+     * Limit how many Shipments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Shipment.trackingEvents
+   */
+  export type Shipment$trackingEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    where?: TrackingEventWhereInput
+    orderBy?: TrackingEventOrderByWithRelationInput | TrackingEventOrderByWithRelationInput[]
+    cursor?: TrackingEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TrackingEventScalarFieldEnum | TrackingEventScalarFieldEnum[]
+  }
+
+  /**
+   * Shipment without action
+   */
+  export type ShipmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Shipment
+     */
+    select?: ShipmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Shipment
+     */
+    omit?: ShipmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShipmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TrackingEvent
+   */
+
+  export type AggregateTrackingEvent = {
+    _count: TrackingEventCountAggregateOutputType | null
+    _avg: TrackingEventAvgAggregateOutputType | null
+    _sum: TrackingEventSumAggregateOutputType | null
+    _min: TrackingEventMinAggregateOutputType | null
+    _max: TrackingEventMaxAggregateOutputType | null
+  }
+
+  export type TrackingEventAvgAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type TrackingEventSumAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type TrackingEventMinAggregateOutputType = {
+    id: string | null
+    shipmentId: string | null
+    status: $Enums.ShipmentStatus | null
+    location: string | null
+    description: string | null
+    latitude: number | null
+    longitude: number | null
+    createdAt: Date | null
+  }
+
+  export type TrackingEventMaxAggregateOutputType = {
+    id: string | null
+    shipmentId: string | null
+    status: $Enums.ShipmentStatus | null
+    location: string | null
+    description: string | null
+    latitude: number | null
+    longitude: number | null
+    createdAt: Date | null
+  }
+
+  export type TrackingEventCountAggregateOutputType = {
+    id: number
+    shipmentId: number
+    status: number
+    location: number
+    description: number
+    latitude: number
+    longitude: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TrackingEventAvgAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type TrackingEventSumAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type TrackingEventMinAggregateInputType = {
+    id?: true
+    shipmentId?: true
+    status?: true
+    location?: true
+    description?: true
+    latitude?: true
+    longitude?: true
+    createdAt?: true
+  }
+
+  export type TrackingEventMaxAggregateInputType = {
+    id?: true
+    shipmentId?: true
+    status?: true
+    location?: true
+    description?: true
+    latitude?: true
+    longitude?: true
+    createdAt?: true
+  }
+
+  export type TrackingEventCountAggregateInputType = {
+    id?: true
+    shipmentId?: true
+    status?: true
+    location?: true
+    description?: true
+    latitude?: true
+    longitude?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TrackingEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrackingEvent to aggregate.
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrackingEvents to fetch.
+     */
+    orderBy?: TrackingEventOrderByWithRelationInput | TrackingEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TrackingEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrackingEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrackingEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TrackingEvents
+    **/
+    _count?: true | TrackingEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TrackingEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TrackingEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TrackingEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TrackingEventMaxAggregateInputType
+  }
+
+  export type GetTrackingEventAggregateType<T extends TrackingEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateTrackingEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTrackingEvent[P]>
+      : GetScalarType<T[P], AggregateTrackingEvent[P]>
+  }
+
+
+
+
+  export type TrackingEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrackingEventWhereInput
+    orderBy?: TrackingEventOrderByWithAggregationInput | TrackingEventOrderByWithAggregationInput[]
+    by: TrackingEventScalarFieldEnum[] | TrackingEventScalarFieldEnum
+    having?: TrackingEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TrackingEventCountAggregateInputType | true
+    _avg?: TrackingEventAvgAggregateInputType
+    _sum?: TrackingEventSumAggregateInputType
+    _min?: TrackingEventMinAggregateInputType
+    _max?: TrackingEventMaxAggregateInputType
+  }
+
+  export type TrackingEventGroupByOutputType = {
+    id: string
+    shipmentId: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description: string | null
+    latitude: number | null
+    longitude: number | null
+    createdAt: Date
+    _count: TrackingEventCountAggregateOutputType | null
+    _avg: TrackingEventAvgAggregateOutputType | null
+    _sum: TrackingEventSumAggregateOutputType | null
+    _min: TrackingEventMinAggregateOutputType | null
+    _max: TrackingEventMaxAggregateOutputType | null
+  }
+
+  type GetTrackingEventGroupByPayload<T extends TrackingEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TrackingEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TrackingEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TrackingEventGroupByOutputType[P]>
+            : GetScalarType<T[P], TrackingEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TrackingEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shipmentId?: boolean
+    status?: boolean
+    location?: boolean
+    description?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    createdAt?: boolean
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trackingEvent"]>
+
+  export type TrackingEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shipmentId?: boolean
+    status?: boolean
+    location?: boolean
+    description?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    createdAt?: boolean
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trackingEvent"]>
+
+  export type TrackingEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shipmentId?: boolean
+    status?: boolean
+    location?: boolean
+    description?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    createdAt?: boolean
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trackingEvent"]>
+
+  export type TrackingEventSelectScalar = {
+    id?: boolean
+    shipmentId?: boolean
+    status?: boolean
+    location?: boolean
+    description?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    createdAt?: boolean
+  }
+
+  export type TrackingEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shipmentId" | "status" | "location" | "description" | "latitude" | "longitude" | "createdAt", ExtArgs["result"]["trackingEvent"]>
+  export type TrackingEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }
+  export type TrackingEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }
+  export type TrackingEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    shipment?: boolean | ShipmentDefaultArgs<ExtArgs>
+  }
+
+  export type $TrackingEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TrackingEvent"
+    objects: {
+      shipment: Prisma.$ShipmentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      shipmentId: string
+      status: $Enums.ShipmentStatus
+      location: string
+      description: string | null
+      latitude: number | null
+      longitude: number | null
+      createdAt: Date
+    }, ExtArgs["result"]["trackingEvent"]>
+    composites: {}
+  }
+
+  type TrackingEventGetPayload<S extends boolean | null | undefined | TrackingEventDefaultArgs> = $Result.GetResult<Prisma.$TrackingEventPayload, S>
+
+  type TrackingEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TrackingEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TrackingEventCountAggregateInputType | true
+    }
+
+  export interface TrackingEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TrackingEvent'], meta: { name: 'TrackingEvent' } }
+    /**
+     * Find zero or one TrackingEvent that matches the filter.
+     * @param {TrackingEventFindUniqueArgs} args - Arguments to find a TrackingEvent
+     * @example
+     * // Get one TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TrackingEventFindUniqueArgs>(args: SelectSubset<T, TrackingEventFindUniqueArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TrackingEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TrackingEventFindUniqueOrThrowArgs} args - Arguments to find a TrackingEvent
+     * @example
+     * // Get one TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TrackingEventFindUniqueOrThrowArgs>(args: SelectSubset<T, TrackingEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrackingEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventFindFirstArgs} args - Arguments to find a TrackingEvent
+     * @example
+     * // Get one TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TrackingEventFindFirstArgs>(args?: SelectSubset<T, TrackingEventFindFirstArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrackingEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventFindFirstOrThrowArgs} args - Arguments to find a TrackingEvent
+     * @example
+     * // Get one TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TrackingEventFindFirstOrThrowArgs>(args?: SelectSubset<T, TrackingEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TrackingEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TrackingEvents
+     * const trackingEvents = await prisma.trackingEvent.findMany()
+     * 
+     * // Get first 10 TrackingEvents
+     * const trackingEvents = await prisma.trackingEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const trackingEventWithIdOnly = await prisma.trackingEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TrackingEventFindManyArgs>(args?: SelectSubset<T, TrackingEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TrackingEvent.
+     * @param {TrackingEventCreateArgs} args - Arguments to create a TrackingEvent.
+     * @example
+     * // Create one TrackingEvent
+     * const TrackingEvent = await prisma.trackingEvent.create({
+     *   data: {
+     *     // ... data to create a TrackingEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends TrackingEventCreateArgs>(args: SelectSubset<T, TrackingEventCreateArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TrackingEvents.
+     * @param {TrackingEventCreateManyArgs} args - Arguments to create many TrackingEvents.
+     * @example
+     * // Create many TrackingEvents
+     * const trackingEvent = await prisma.trackingEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TrackingEventCreateManyArgs>(args?: SelectSubset<T, TrackingEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TrackingEvents and returns the data saved in the database.
+     * @param {TrackingEventCreateManyAndReturnArgs} args - Arguments to create many TrackingEvents.
+     * @example
+     * // Create many TrackingEvents
+     * const trackingEvent = await prisma.trackingEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TrackingEvents and only return the `id`
+     * const trackingEventWithIdOnly = await prisma.trackingEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TrackingEventCreateManyAndReturnArgs>(args?: SelectSubset<T, TrackingEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TrackingEvent.
+     * @param {TrackingEventDeleteArgs} args - Arguments to delete one TrackingEvent.
+     * @example
+     * // Delete one TrackingEvent
+     * const TrackingEvent = await prisma.trackingEvent.delete({
+     *   where: {
+     *     // ... filter to delete one TrackingEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TrackingEventDeleteArgs>(args: SelectSubset<T, TrackingEventDeleteArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TrackingEvent.
+     * @param {TrackingEventUpdateArgs} args - Arguments to update one TrackingEvent.
+     * @example
+     * // Update one TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TrackingEventUpdateArgs>(args: SelectSubset<T, TrackingEventUpdateArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TrackingEvents.
+     * @param {TrackingEventDeleteManyArgs} args - Arguments to filter TrackingEvents to delete.
+     * @example
+     * // Delete a few TrackingEvents
+     * const { count } = await prisma.trackingEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TrackingEventDeleteManyArgs>(args?: SelectSubset<T, TrackingEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrackingEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TrackingEvents
+     * const trackingEvent = await prisma.trackingEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TrackingEventUpdateManyArgs>(args: SelectSubset<T, TrackingEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrackingEvents and returns the data updated in the database.
+     * @param {TrackingEventUpdateManyAndReturnArgs} args - Arguments to update many TrackingEvents.
+     * @example
+     * // Update many TrackingEvents
+     * const trackingEvent = await prisma.trackingEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TrackingEvents and only return the `id`
+     * const trackingEventWithIdOnly = await prisma.trackingEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TrackingEventUpdateManyAndReturnArgs>(args: SelectSubset<T, TrackingEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TrackingEvent.
+     * @param {TrackingEventUpsertArgs} args - Arguments to update or create a TrackingEvent.
+     * @example
+     * // Update or create a TrackingEvent
+     * const trackingEvent = await prisma.trackingEvent.upsert({
+     *   create: {
+     *     // ... data to create a TrackingEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TrackingEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TrackingEventUpsertArgs>(args: SelectSubset<T, TrackingEventUpsertArgs<ExtArgs>>): Prisma__TrackingEventClient<$Result.GetResult<Prisma.$TrackingEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TrackingEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventCountArgs} args - Arguments to filter TrackingEvents to count.
+     * @example
+     * // Count the number of TrackingEvents
+     * const count = await prisma.trackingEvent.count({
+     *   where: {
+     *     // ... the filter for the TrackingEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends TrackingEventCountArgs>(
+      args?: Subset<T, TrackingEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TrackingEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TrackingEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TrackingEventAggregateArgs>(args: Subset<T, TrackingEventAggregateArgs>): Prisma.PrismaPromise<GetTrackingEventAggregateType<T>>
+
+    /**
+     * Group by TrackingEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrackingEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TrackingEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TrackingEventGroupByArgs['orderBy'] }
+        : { orderBy?: TrackingEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TrackingEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTrackingEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TrackingEvent model
+   */
+  readonly fields: TrackingEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TrackingEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TrackingEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    shipment<T extends ShipmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ShipmentDefaultArgs<ExtArgs>>): Prisma__ShipmentClient<$Result.GetResult<Prisma.$ShipmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TrackingEvent model
+   */
+  interface TrackingEventFieldRefs {
+    readonly id: FieldRef<"TrackingEvent", 'String'>
+    readonly shipmentId: FieldRef<"TrackingEvent", 'String'>
+    readonly status: FieldRef<"TrackingEvent", 'ShipmentStatus'>
+    readonly location: FieldRef<"TrackingEvent", 'String'>
+    readonly description: FieldRef<"TrackingEvent", 'String'>
+    readonly latitude: FieldRef<"TrackingEvent", 'Float'>
+    readonly longitude: FieldRef<"TrackingEvent", 'Float'>
+    readonly createdAt: FieldRef<"TrackingEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TrackingEvent findUnique
+   */
+  export type TrackingEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TrackingEvent to fetch.
+     */
+    where: TrackingEventWhereUniqueInput
+  }
+
+  /**
+   * TrackingEvent findUniqueOrThrow
+   */
+  export type TrackingEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TrackingEvent to fetch.
+     */
+    where: TrackingEventWhereUniqueInput
+  }
+
+  /**
+   * TrackingEvent findFirst
+   */
+  export type TrackingEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TrackingEvent to fetch.
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrackingEvents to fetch.
+     */
+    orderBy?: TrackingEventOrderByWithRelationInput | TrackingEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrackingEvents.
+     */
+    cursor?: TrackingEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrackingEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrackingEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrackingEvents.
+     */
+    distinct?: TrackingEventScalarFieldEnum | TrackingEventScalarFieldEnum[]
+  }
+
+  /**
+   * TrackingEvent findFirstOrThrow
+   */
+  export type TrackingEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TrackingEvent to fetch.
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrackingEvents to fetch.
+     */
+    orderBy?: TrackingEventOrderByWithRelationInput | TrackingEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrackingEvents.
+     */
+    cursor?: TrackingEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrackingEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrackingEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrackingEvents.
+     */
+    distinct?: TrackingEventScalarFieldEnum | TrackingEventScalarFieldEnum[]
+  }
+
+  /**
+   * TrackingEvent findMany
+   */
+  export type TrackingEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TrackingEvents to fetch.
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrackingEvents to fetch.
+     */
+    orderBy?: TrackingEventOrderByWithRelationInput | TrackingEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TrackingEvents.
+     */
+    cursor?: TrackingEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrackingEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrackingEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrackingEvents.
+     */
+    distinct?: TrackingEventScalarFieldEnum | TrackingEventScalarFieldEnum[]
+  }
+
+  /**
+   * TrackingEvent create
+   */
+  export type TrackingEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TrackingEvent.
+     */
+    data: XOR<TrackingEventCreateInput, TrackingEventUncheckedCreateInput>
+  }
+
+  /**
+   * TrackingEvent createMany
+   */
+  export type TrackingEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TrackingEvents.
+     */
+    data: TrackingEventCreateManyInput | TrackingEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TrackingEvent createManyAndReturn
+   */
+  export type TrackingEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many TrackingEvents.
+     */
+    data: TrackingEventCreateManyInput | TrackingEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrackingEvent update
+   */
+  export type TrackingEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TrackingEvent.
+     */
+    data: XOR<TrackingEventUpdateInput, TrackingEventUncheckedUpdateInput>
+    /**
+     * Choose, which TrackingEvent to update.
+     */
+    where: TrackingEventWhereUniqueInput
+  }
+
+  /**
+   * TrackingEvent updateMany
+   */
+  export type TrackingEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TrackingEvents.
+     */
+    data: XOR<TrackingEventUpdateManyMutationInput, TrackingEventUncheckedUpdateManyInput>
+    /**
+     * Filter which TrackingEvents to update
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * Limit how many TrackingEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrackingEvent updateManyAndReturn
+   */
+  export type TrackingEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * The data used to update TrackingEvents.
+     */
+    data: XOR<TrackingEventUpdateManyMutationInput, TrackingEventUncheckedUpdateManyInput>
+    /**
+     * Filter which TrackingEvents to update
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * Limit how many TrackingEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrackingEvent upsert
+   */
+  export type TrackingEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TrackingEvent to update in case it exists.
+     */
+    where: TrackingEventWhereUniqueInput
+    /**
+     * In case the TrackingEvent found by the `where` argument doesn't exist, create a new TrackingEvent with this data.
+     */
+    create: XOR<TrackingEventCreateInput, TrackingEventUncheckedCreateInput>
+    /**
+     * In case the TrackingEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TrackingEventUpdateInput, TrackingEventUncheckedUpdateInput>
+  }
+
+  /**
+   * TrackingEvent delete
+   */
+  export type TrackingEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+    /**
+     * Filter which TrackingEvent to delete.
+     */
+    where: TrackingEventWhereUniqueInput
+  }
+
+  /**
+   * TrackingEvent deleteMany
+   */
+  export type TrackingEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrackingEvents to delete
+     */
+    where?: TrackingEventWhereInput
+    /**
+     * Limit how many TrackingEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrackingEvent without action
+   */
+  export type TrackingEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackingEvent
+     */
+    select?: TrackingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrackingEvent
+     */
+    omit?: TrackingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrackingEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Certificate
+   */
+
+  export type AggregateCertificate = {
+    _count: CertificateCountAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  export type CertificateMinAggregateOutputType = {
+    id: string | null
+    uploadedBy: string | null
+    documentType: $Enums.CertificateType | null
+    fileName: string | null
+    cid: string | null
+    ipfsUri: string | null
+    createdAt: Date | null
+    produceId: string | null
+  }
+
+  export type CertificateMaxAggregateOutputType = {
+    id: string | null
+    uploadedBy: string | null
+    documentType: $Enums.CertificateType | null
+    fileName: string | null
+    cid: string | null
+    ipfsUri: string | null
+    createdAt: Date | null
+    produceId: string | null
+  }
+
+  export type CertificateCountAggregateOutputType = {
+    id: number
+    uploadedBy: number
+    documentType: number
+    fileName: number
+    cid: number
+    ipfsUri: number
+    createdAt: number
+    produceId: number
+    _all: number
+  }
+
+
+  export type CertificateMinAggregateInputType = {
+    id?: true
+    uploadedBy?: true
+    documentType?: true
+    fileName?: true
+    cid?: true
+    ipfsUri?: true
+    createdAt?: true
+    produceId?: true
+  }
+
+  export type CertificateMaxAggregateInputType = {
+    id?: true
+    uploadedBy?: true
+    documentType?: true
+    fileName?: true
+    cid?: true
+    ipfsUri?: true
+    createdAt?: true
+    produceId?: true
+  }
+
+  export type CertificateCountAggregateInputType = {
+    id?: true
+    uploadedBy?: true
+    documentType?: true
+    fileName?: true
+    cid?: true
+    ipfsUri?: true
+    createdAt?: true
+    produceId?: true
+    _all?: true
+  }
+
+  export type CertificateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificate to aggregate.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Certificates
+    **/
+    _count?: true | CertificateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CertificateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type GetCertificateAggregateType<T extends CertificateAggregateArgs> = {
+        [P in keyof T & keyof AggregateCertificate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCertificate[P]>
+      : GetScalarType<T[P], AggregateCertificate[P]>
+  }
+
+
+
+
+  export type CertificateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithAggregationInput | CertificateOrderByWithAggregationInput[]
+    by: CertificateScalarFieldEnum[] | CertificateScalarFieldEnum
+    having?: CertificateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CertificateCountAggregateInputType | true
+    _min?: CertificateMinAggregateInputType
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type CertificateGroupByOutputType = {
+    id: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt: Date
+    produceId: string
+    _count: CertificateCountAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  type GetCertificateGroupByPayload<T extends CertificateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CertificateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CertificateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+            : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CertificateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedBy?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    cid?: boolean
+    ipfsUri?: boolean
+    createdAt?: boolean
+    produceId?: boolean
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedBy?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    cid?: boolean
+    ipfsUri?: boolean
+    createdAt?: boolean
+    produceId?: boolean
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedBy?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    cid?: boolean
+    ipfsUri?: boolean
+    createdAt?: boolean
+    produceId?: boolean
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectScalar = {
+    id?: boolean
+    uploadedBy?: boolean
+    documentType?: boolean
+    fileName?: boolean
+    cid?: boolean
+    ipfsUri?: boolean
+    createdAt?: boolean
+    produceId?: boolean
+  }
+
+  export type CertificateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uploadedBy" | "documentType" | "fileName" | "cid" | "ipfsUri" | "createdAt" | "produceId", ExtArgs["result"]["certificate"]>
+  export type CertificateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }
+  export type CertificateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }
+  export type CertificateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produce?: boolean | ProduceDefaultArgs<ExtArgs>
+  }
+
+  export type $CertificatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Certificate"
+    objects: {
+      produce: Prisma.$ProducePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      uploadedBy: string
+      documentType: $Enums.CertificateType
+      fileName: string
+      cid: string
+      ipfsUri: string
+      createdAt: Date
+      produceId: string
+    }, ExtArgs["result"]["certificate"]>
+    composites: {}
+  }
+
+  type CertificateGetPayload<S extends boolean | null | undefined | CertificateDefaultArgs> = $Result.GetResult<Prisma.$CertificatePayload, S>
+
+  type CertificateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CertificateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CertificateCountAggregateInputType | true
+    }
+
+  export interface CertificateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Certificate'], meta: { name: 'Certificate' } }
+    /**
+     * Find zero or one Certificate that matches the filter.
+     * @param {CertificateFindUniqueArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CertificateFindUniqueArgs>(args: SelectSubset<T, CertificateFindUniqueArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Certificate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CertificateFindUniqueOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CertificateFindUniqueOrThrowArgs>(args: SelectSubset<T, CertificateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Certificate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CertificateFindFirstArgs>(args?: SelectSubset<T, CertificateFindFirstArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Certificate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CertificateFindFirstOrThrowArgs>(args?: SelectSubset<T, CertificateFindFirstOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Certificates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Certificates
+     * const certificates = await prisma.certificate.findMany()
+     * 
+     * // Get first 10 Certificates
+     * const certificates = await prisma.certificate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const certificateWithIdOnly = await prisma.certificate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CertificateFindManyArgs>(args?: SelectSubset<T, CertificateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Certificate.
+     * @param {CertificateCreateArgs} args - Arguments to create a Certificate.
+     * @example
+     * // Create one Certificate
+     * const Certificate = await prisma.certificate.create({
+     *   data: {
+     *     // ... data to create a Certificate
+     *   }
+     * })
+     * 
+     */
+    create<T extends CertificateCreateArgs>(args: SelectSubset<T, CertificateCreateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Certificates.
+     * @param {CertificateCreateManyArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CertificateCreateManyArgs>(args?: SelectSubset<T, CertificateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Certificates and returns the data saved in the database.
+     * @param {CertificateCreateManyAndReturnArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Certificates and only return the `id`
+     * const certificateWithIdOnly = await prisma.certificate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CertificateCreateManyAndReturnArgs>(args?: SelectSubset<T, CertificateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Certificate.
+     * @param {CertificateDeleteArgs} args - Arguments to delete one Certificate.
+     * @example
+     * // Delete one Certificate
+     * const Certificate = await prisma.certificate.delete({
+     *   where: {
+     *     // ... filter to delete one Certificate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CertificateDeleteArgs>(args: SelectSubset<T, CertificateDeleteArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Certificate.
+     * @param {CertificateUpdateArgs} args - Arguments to update one Certificate.
+     * @example
+     * // Update one Certificate
+     * const certificate = await prisma.certificate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CertificateUpdateArgs>(args: SelectSubset<T, CertificateUpdateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Certificates.
+     * @param {CertificateDeleteManyArgs} args - Arguments to filter Certificates to delete.
+     * @example
+     * // Delete a few Certificates
+     * const { count } = await prisma.certificate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CertificateDeleteManyArgs>(args?: SelectSubset<T, CertificateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Certificates
+     * const certificate = await prisma.certificate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CertificateUpdateManyArgs>(args: SelectSubset<T, CertificateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificates and returns the data updated in the database.
+     * @param {CertificateUpdateManyAndReturnArgs} args - Arguments to update many Certificates.
+     * @example
+     * // Update many Certificates
+     * const certificate = await prisma.certificate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Certificates and only return the `id`
+     * const certificateWithIdOnly = await prisma.certificate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CertificateUpdateManyAndReturnArgs>(args: SelectSubset<T, CertificateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Certificate.
+     * @param {CertificateUpsertArgs} args - Arguments to update or create a Certificate.
+     * @example
+     * // Update or create a Certificate
+     * const certificate = await prisma.certificate.upsert({
+     *   create: {
+     *     // ... data to create a Certificate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Certificate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CertificateUpsertArgs>(args: SelectSubset<T, CertificateUpsertArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateCountArgs} args - Arguments to filter Certificates to count.
+     * @example
+     * // Count the number of Certificates
+     * const count = await prisma.certificate.count({
+     *   where: {
+     *     // ... the filter for the Certificates we want to count
+     *   }
+     * })
+    **/
+    count<T extends CertificateCountArgs>(
+      args?: Subset<T, CertificateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CertificateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CertificateAggregateArgs>(args: Subset<T, CertificateAggregateArgs>): Prisma.PrismaPromise<GetCertificateAggregateType<T>>
+
+    /**
+     * Group by Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CertificateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CertificateGroupByArgs['orderBy'] }
+        : { orderBy?: CertificateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CertificateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCertificateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Certificate model
+   */
+  readonly fields: CertificateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Certificate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CertificateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    produce<T extends ProduceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduceDefaultArgs<ExtArgs>>): Prisma__ProduceClient<$Result.GetResult<Prisma.$ProducePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Certificate model
+   */
+  interface CertificateFieldRefs {
+    readonly id: FieldRef<"Certificate", 'String'>
+    readonly uploadedBy: FieldRef<"Certificate", 'String'>
+    readonly documentType: FieldRef<"Certificate", 'CertificateType'>
+    readonly fileName: FieldRef<"Certificate", 'String'>
+    readonly cid: FieldRef<"Certificate", 'String'>
+    readonly ipfsUri: FieldRef<"Certificate", 'String'>
+    readonly createdAt: FieldRef<"Certificate", 'DateTime'>
+    readonly produceId: FieldRef<"Certificate", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Certificate findUnique
+   */
+  export type CertificateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findUniqueOrThrow
+   */
+  export type CertificateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findFirst
+   */
+  export type CertificateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findFirstOrThrow
+   */
+  export type CertificateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findMany
+   */
+  export type CertificateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificates to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate create
+   */
+  export type CertificateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Certificate.
+     */
+    data: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+  }
+
+  /**
+   * Certificate createMany
+   */
+  export type CertificateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Certificate createManyAndReturn
+   */
+  export type CertificateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Certificate update
+   */
+  export type CertificateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Certificate.
+     */
+    data: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+    /**
+     * Choose, which Certificate to update.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate updateMany
+   */
+  export type CertificateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Certificates.
+     */
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificates to update
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Certificate updateManyAndReturn
+   */
+  export type CertificateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * The data used to update Certificates.
+     */
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificates to update
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Certificate upsert
+   */
+  export type CertificateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Certificate to update in case it exists.
+     */
+    where: CertificateWhereUniqueInput
+    /**
+     * In case the Certificate found by the `where` argument doesn't exist, create a new Certificate with this data.
+     */
+    create: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+    /**
+     * In case the Certificate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+  }
+
+  /**
+   * Certificate delete
+   */
+  export type CertificateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter which Certificate to delete.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate deleteMany
+   */
+  export type CertificateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificates to delete
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Certificate without action
+   */
+  export type CertificateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
   }
 
 
@@ -7446,6 +11280,51 @@ export namespace Prisma {
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+  export const ShipmentScalarFieldEnum: {
+    id: 'id',
+    orderId: 'orderId',
+    carrier: 'carrier',
+    trackingNumber: 'trackingNumber',
+    pickupLocation: 'pickupLocation',
+    deliveryLocation: 'deliveryLocation',
+    currentLocation: 'currentLocation',
+    status: 'status',
+    estimatedDelivery: 'estimatedDelivery',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ShipmentScalarFieldEnum = (typeof ShipmentScalarFieldEnum)[keyof typeof ShipmentScalarFieldEnum]
+
+
+  export const TrackingEventScalarFieldEnum: {
+    id: 'id',
+    shipmentId: 'shipmentId',
+    status: 'status',
+    location: 'location',
+    description: 'description',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    createdAt: 'createdAt'
+  };
+
+  export type TrackingEventScalarFieldEnum = (typeof TrackingEventScalarFieldEnum)[keyof typeof TrackingEventScalarFieldEnum]
+
+
+  export const CertificateScalarFieldEnum: {
+    id: 'id',
+    uploadedBy: 'uploadedBy',
+    documentType: 'documentType',
+    fileName: 'fileName',
+    cid: 'cid',
+    ipfsUri: 'ipfsUri',
+    createdAt: 'createdAt',
+    produceId: 'produceId'
+  };
+
+  export type CertificateScalarFieldEnum = (typeof CertificateScalarFieldEnum)[keyof typeof CertificateScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7590,6 +11469,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ShipmentStatus'
+   */
+  export type EnumShipmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShipmentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ShipmentStatus[]'
+   */
+  export type ListEnumShipmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShipmentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CertificateType'
+   */
+  export type EnumCertificateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CertificateType'>
+    
+
+
+  /**
+   * Reference to a field of type 'CertificateType[]'
+   */
+  export type ListEnumCertificateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CertificateType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7695,6 +11602,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Produce"> | Date | string
     farmer?: XOR<UserScalarRelationFilter, UserWhereInput>
     listing?: XOR<ListingNullableScalarRelationFilter, ListingWhereInput> | null
+    certificate?: CertificateListRelationFilter
   }
 
   export type ProduceOrderByWithRelationInput = {
@@ -7709,6 +11617,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     farmer?: UserOrderByWithRelationInput
     listing?: ListingOrderByWithRelationInput
+    certificate?: CertificateOrderByRelationAggregateInput
   }
 
   export type ProduceWhereUniqueInput = Prisma.AtLeast<{
@@ -7726,6 +11635,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Produce"> | Date | string
     farmer?: XOR<UserScalarRelationFilter, UserWhereInput>
     listing?: XOR<ListingNullableScalarRelationFilter, ListingWhereInput> | null
+    certificate?: CertificateListRelationFilter
   }, "id">
 
   export type ProduceOrderByWithAggregationInput = {
@@ -7931,6 +11841,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    shipment?: XOR<ShipmentNullableScalarRelationFilter, ShipmentWhereInput> | null
     offer?: XOR<OfferScalarRelationFilter, OfferWhereInput>
     listing?: XOR<ListingScalarRelationFilter, ListingWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7949,6 +11860,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    shipment?: ShipmentOrderByWithRelationInput
     offer?: OfferOrderByWithRelationInput
     listing?: ListingOrderByWithRelationInput
     buyer?: UserOrderByWithRelationInput
@@ -7970,6 +11882,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    shipment?: XOR<ShipmentNullableScalarRelationFilter, ShipmentWhereInput> | null
     offer?: XOR<OfferScalarRelationFilter, OfferWhereInput>
     listing?: XOR<ListingScalarRelationFilter, ListingWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -8010,6 +11923,236 @@ export namespace Prisma {
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
+  }
+
+  export type ShipmentWhereInput = {
+    AND?: ShipmentWhereInput | ShipmentWhereInput[]
+    OR?: ShipmentWhereInput[]
+    NOT?: ShipmentWhereInput | ShipmentWhereInput[]
+    id?: StringFilter<"Shipment"> | string
+    orderId?: StringFilter<"Shipment"> | string
+    carrier?: StringNullableFilter<"Shipment"> | string | null
+    trackingNumber?: StringFilter<"Shipment"> | string
+    pickupLocation?: StringFilter<"Shipment"> | string
+    deliveryLocation?: StringFilter<"Shipment"> | string
+    currentLocation?: StringNullableFilter<"Shipment"> | string | null
+    status?: EnumShipmentStatusFilter<"Shipment"> | $Enums.ShipmentStatus
+    estimatedDelivery?: DateTimeNullableFilter<"Shipment"> | Date | string | null
+    createdAt?: DateTimeFilter<"Shipment"> | Date | string
+    updatedAt?: DateTimeFilter<"Shipment"> | Date | string
+    order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+    trackingEvents?: TrackingEventListRelationFilter
+  }
+
+  export type ShipmentOrderByWithRelationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    carrier?: SortOrderInput | SortOrder
+    trackingNumber?: SortOrder
+    pickupLocation?: SortOrder
+    deliveryLocation?: SortOrder
+    currentLocation?: SortOrderInput | SortOrder
+    status?: SortOrder
+    estimatedDelivery?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    order?: OrderOrderByWithRelationInput
+    trackingEvents?: TrackingEventOrderByRelationAggregateInput
+  }
+
+  export type ShipmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    orderId?: string
+    trackingNumber?: string
+    AND?: ShipmentWhereInput | ShipmentWhereInput[]
+    OR?: ShipmentWhereInput[]
+    NOT?: ShipmentWhereInput | ShipmentWhereInput[]
+    carrier?: StringNullableFilter<"Shipment"> | string | null
+    pickupLocation?: StringFilter<"Shipment"> | string
+    deliveryLocation?: StringFilter<"Shipment"> | string
+    currentLocation?: StringNullableFilter<"Shipment"> | string | null
+    status?: EnumShipmentStatusFilter<"Shipment"> | $Enums.ShipmentStatus
+    estimatedDelivery?: DateTimeNullableFilter<"Shipment"> | Date | string | null
+    createdAt?: DateTimeFilter<"Shipment"> | Date | string
+    updatedAt?: DateTimeFilter<"Shipment"> | Date | string
+    order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+    trackingEvents?: TrackingEventListRelationFilter
+  }, "id" | "orderId" | "trackingNumber">
+
+  export type ShipmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    carrier?: SortOrderInput | SortOrder
+    trackingNumber?: SortOrder
+    pickupLocation?: SortOrder
+    deliveryLocation?: SortOrder
+    currentLocation?: SortOrderInput | SortOrder
+    status?: SortOrder
+    estimatedDelivery?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ShipmentCountOrderByAggregateInput
+    _max?: ShipmentMaxOrderByAggregateInput
+    _min?: ShipmentMinOrderByAggregateInput
+  }
+
+  export type ShipmentScalarWhereWithAggregatesInput = {
+    AND?: ShipmentScalarWhereWithAggregatesInput | ShipmentScalarWhereWithAggregatesInput[]
+    OR?: ShipmentScalarWhereWithAggregatesInput[]
+    NOT?: ShipmentScalarWhereWithAggregatesInput | ShipmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Shipment"> | string
+    orderId?: StringWithAggregatesFilter<"Shipment"> | string
+    carrier?: StringNullableWithAggregatesFilter<"Shipment"> | string | null
+    trackingNumber?: StringWithAggregatesFilter<"Shipment"> | string
+    pickupLocation?: StringWithAggregatesFilter<"Shipment"> | string
+    deliveryLocation?: StringWithAggregatesFilter<"Shipment"> | string
+    currentLocation?: StringNullableWithAggregatesFilter<"Shipment"> | string | null
+    status?: EnumShipmentStatusWithAggregatesFilter<"Shipment"> | $Enums.ShipmentStatus
+    estimatedDelivery?: DateTimeNullableWithAggregatesFilter<"Shipment"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Shipment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Shipment"> | Date | string
+  }
+
+  export type TrackingEventWhereInput = {
+    AND?: TrackingEventWhereInput | TrackingEventWhereInput[]
+    OR?: TrackingEventWhereInput[]
+    NOT?: TrackingEventWhereInput | TrackingEventWhereInput[]
+    id?: StringFilter<"TrackingEvent"> | string
+    shipmentId?: StringFilter<"TrackingEvent"> | string
+    status?: EnumShipmentStatusFilter<"TrackingEvent"> | $Enums.ShipmentStatus
+    location?: StringFilter<"TrackingEvent"> | string
+    description?: StringNullableFilter<"TrackingEvent"> | string | null
+    latitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    longitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    createdAt?: DateTimeFilter<"TrackingEvent"> | Date | string
+    shipment?: XOR<ShipmentScalarRelationFilter, ShipmentWhereInput>
+  }
+
+  export type TrackingEventOrderByWithRelationInput = {
+    id?: SortOrder
+    shipmentId?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    description?: SortOrderInput | SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    shipment?: ShipmentOrderByWithRelationInput
+  }
+
+  export type TrackingEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TrackingEventWhereInput | TrackingEventWhereInput[]
+    OR?: TrackingEventWhereInput[]
+    NOT?: TrackingEventWhereInput | TrackingEventWhereInput[]
+    shipmentId?: StringFilter<"TrackingEvent"> | string
+    status?: EnumShipmentStatusFilter<"TrackingEvent"> | $Enums.ShipmentStatus
+    location?: StringFilter<"TrackingEvent"> | string
+    description?: StringNullableFilter<"TrackingEvent"> | string | null
+    latitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    longitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    createdAt?: DateTimeFilter<"TrackingEvent"> | Date | string
+    shipment?: XOR<ShipmentScalarRelationFilter, ShipmentWhereInput>
+  }, "id">
+
+  export type TrackingEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    shipmentId?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    description?: SortOrderInput | SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: TrackingEventCountOrderByAggregateInput
+    _avg?: TrackingEventAvgOrderByAggregateInput
+    _max?: TrackingEventMaxOrderByAggregateInput
+    _min?: TrackingEventMinOrderByAggregateInput
+    _sum?: TrackingEventSumOrderByAggregateInput
+  }
+
+  export type TrackingEventScalarWhereWithAggregatesInput = {
+    AND?: TrackingEventScalarWhereWithAggregatesInput | TrackingEventScalarWhereWithAggregatesInput[]
+    OR?: TrackingEventScalarWhereWithAggregatesInput[]
+    NOT?: TrackingEventScalarWhereWithAggregatesInput | TrackingEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TrackingEvent"> | string
+    shipmentId?: StringWithAggregatesFilter<"TrackingEvent"> | string
+    status?: EnumShipmentStatusWithAggregatesFilter<"TrackingEvent"> | $Enums.ShipmentStatus
+    location?: StringWithAggregatesFilter<"TrackingEvent"> | string
+    description?: StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
+    latitude?: FloatNullableWithAggregatesFilter<"TrackingEvent"> | number | null
+    longitude?: FloatNullableWithAggregatesFilter<"TrackingEvent"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"TrackingEvent"> | Date | string
+  }
+
+  export type CertificateWhereInput = {
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    uploadedBy?: StringFilter<"Certificate"> | string
+    documentType?: EnumCertificateTypeFilter<"Certificate"> | $Enums.CertificateType
+    fileName?: StringFilter<"Certificate"> | string
+    cid?: StringFilter<"Certificate"> | string
+    ipfsUri?: StringFilter<"Certificate"> | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    produceId?: StringFilter<"Certificate"> | string
+    produce?: XOR<ProduceScalarRelationFilter, ProduceWhereInput>
+  }
+
+  export type CertificateOrderByWithRelationInput = {
+    id?: SortOrder
+    uploadedBy?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    cid?: SortOrder
+    ipfsUri?: SortOrder
+    createdAt?: SortOrder
+    produceId?: SortOrder
+    produce?: ProduceOrderByWithRelationInput
+  }
+
+  export type CertificateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    uploadedBy?: StringFilter<"Certificate"> | string
+    documentType?: EnumCertificateTypeFilter<"Certificate"> | $Enums.CertificateType
+    fileName?: StringFilter<"Certificate"> | string
+    cid?: StringFilter<"Certificate"> | string
+    ipfsUri?: StringFilter<"Certificate"> | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    produceId?: StringFilter<"Certificate"> | string
+    produce?: XOR<ProduceScalarRelationFilter, ProduceWhereInput>
+  }, "id">
+
+  export type CertificateOrderByWithAggregationInput = {
+    id?: SortOrder
+    uploadedBy?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    cid?: SortOrder
+    ipfsUri?: SortOrder
+    createdAt?: SortOrder
+    produceId?: SortOrder
+    _count?: CertificateCountOrderByAggregateInput
+    _max?: CertificateMaxOrderByAggregateInput
+    _min?: CertificateMinOrderByAggregateInput
+  }
+
+  export type CertificateScalarWhereWithAggregatesInput = {
+    AND?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    OR?: CertificateScalarWhereWithAggregatesInput[]
+    NOT?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Certificate"> | string
+    uploadedBy?: StringWithAggregatesFilter<"Certificate"> | string
+    documentType?: EnumCertificateTypeWithAggregatesFilter<"Certificate"> | $Enums.CertificateType
+    fileName?: StringWithAggregatesFilter<"Certificate"> | string
+    cid?: StringWithAggregatesFilter<"Certificate"> | string
+    ipfsUri?: StringWithAggregatesFilter<"Certificate"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+    produceId?: StringWithAggregatesFilter<"Certificate"> | string
   }
 
   export type UserCreateInput = {
@@ -8109,6 +12252,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     farmer: UserCreateNestedOneWithoutProduceInput
     listing?: ListingCreateNestedOneWithoutProduceInput
+    certificate?: CertificateCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceUncheckedCreateInput = {
@@ -8122,6 +12266,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     listing?: ListingUncheckedCreateNestedOneWithoutProduceInput
+    certificate?: CertificateUncheckedCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceUpdateInput = {
@@ -8135,6 +12280,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     farmer?: UserUpdateOneRequiredWithoutProduceNestedInput
     listing?: ListingUpdateOneWithoutProduceNestedInput
+    certificate?: CertificateUpdateManyWithoutProduceNestedInput
   }
 
   export type ProduceUncheckedUpdateInput = {
@@ -8148,6 +12294,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listing?: ListingUncheckedUpdateOneWithoutProduceNestedInput
+    certificate?: CertificateUncheckedUpdateManyWithoutProduceNestedInput
   }
 
   export type ProduceCreateManyInput = {
@@ -8356,6 +12503,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentCreateNestedOneWithoutOrderInput
     offer: OfferCreateNestedOneWithoutOrderInput
     listing: ListingCreateNestedOneWithoutOrdersInput
     buyer: UserCreateNestedOneWithoutBuyerOrdersInput
@@ -8374,6 +12522,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentUncheckedCreateNestedOneWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
@@ -8384,6 +12533,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneWithoutOrderNestedInput
     offer?: OfferUpdateOneRequiredWithoutOrderNestedInput
     listing?: ListingUpdateOneRequiredWithoutOrdersNestedInput
     buyer?: UserUpdateOneRequiredWithoutBuyerOrdersNestedInput
@@ -8402,6 +12552,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUncheckedUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -8440,6 +12591,259 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShipmentCreateInput = {
+    id?: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    order: OrderCreateNestedOneWithoutShipmentInput
+    trackingEvents?: TrackingEventCreateNestedManyWithoutShipmentInput
+  }
+
+  export type ShipmentUncheckedCreateInput = {
+    id?: string
+    orderId: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutShipmentInput
+  }
+
+  export type ShipmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneRequiredWithoutShipmentNestedInput
+    trackingEvents?: TrackingEventUpdateManyWithoutShipmentNestedInput
+  }
+
+  export type ShipmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trackingEvents?: TrackingEventUncheckedUpdateManyWithoutShipmentNestedInput
+  }
+
+  export type ShipmentCreateManyInput = {
+    id?: string
+    orderId: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ShipmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShipmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventCreateInput = {
+    id?: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+    shipment: ShipmentCreateNestedOneWithoutTrackingEventsInput
+  }
+
+  export type TrackingEventUncheckedCreateInput = {
+    id?: string
+    shipmentId: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+  }
+
+  export type TrackingEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneRequiredWithoutTrackingEventsNestedInput
+  }
+
+  export type TrackingEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shipmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventCreateManyInput = {
+    id?: string
+    shipmentId: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+  }
+
+  export type TrackingEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shipmentId?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateCreateInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+    produce: ProduceCreateNestedOneWithoutCertificateInput
+  }
+
+  export type CertificateUncheckedCreateInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+    produceId: string
+  }
+
+  export type CertificateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produce?: ProduceUpdateOneRequiredWithoutCertificateNestedInput
+  }
+
+  export type CertificateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produceId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CertificateCreateManyInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+    produceId: string
+  }
+
+  export type CertificateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produceId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8631,9 +13035,19 @@ export namespace Prisma {
     isNot?: ListingWhereInput | null
   }
 
+  export type CertificateListRelationFilter = {
+    every?: CertificateWhereInput
+    some?: CertificateWhereInput
+    none?: CertificateWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type CertificateOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProduceCountOrderByAggregateInput = {
@@ -8880,6 +13294,11 @@ export namespace Prisma {
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
   }
 
+  export type ShipmentNullableScalarRelationFilter = {
+    is?: ShipmentWhereInput | null
+    isNot?: ShipmentWhereInput | null
+  }
+
   export type OfferScalarRelationFilter = {
     is?: OfferWhereInput
     isNot?: OfferWhereInput
@@ -8947,6 +13366,205 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
+  }
+
+  export type EnumShipmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShipmentStatus | EnumShipmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumShipmentStatusFilter<$PrismaModel> | $Enums.ShipmentStatus
+  }
+
+  export type OrderScalarRelationFilter = {
+    is?: OrderWhereInput
+    isNot?: OrderWhereInput
+  }
+
+  export type TrackingEventListRelationFilter = {
+    every?: TrackingEventWhereInput
+    some?: TrackingEventWhereInput
+    none?: TrackingEventWhereInput
+  }
+
+  export type TrackingEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ShipmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    carrier?: SortOrder
+    trackingNumber?: SortOrder
+    pickupLocation?: SortOrder
+    deliveryLocation?: SortOrder
+    currentLocation?: SortOrder
+    status?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ShipmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    carrier?: SortOrder
+    trackingNumber?: SortOrder
+    pickupLocation?: SortOrder
+    deliveryLocation?: SortOrder
+    currentLocation?: SortOrder
+    status?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ShipmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    carrier?: SortOrder
+    trackingNumber?: SortOrder
+    pickupLocation?: SortOrder
+    deliveryLocation?: SortOrder
+    currentLocation?: SortOrder
+    status?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShipmentStatus | EnumShipmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumShipmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ShipmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShipmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumShipmentStatusFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ShipmentScalarRelationFilter = {
+    is?: ShipmentWhereInput
+    isNot?: ShipmentWhereInput
+  }
+
+  export type TrackingEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    shipmentId?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TrackingEventAvgOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type TrackingEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    shipmentId?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TrackingEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    shipmentId?: SortOrder
+    status?: SortOrder
+    location?: SortOrder
+    description?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TrackingEventSumOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumCertificateTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CertificateType | EnumCertificateTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCertificateTypeFilter<$PrismaModel> | $Enums.CertificateType
+  }
+
+  export type CertificateCountOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedBy?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    cid?: SortOrder
+    ipfsUri?: SortOrder
+    createdAt?: SortOrder
+    produceId?: SortOrder
+  }
+
+  export type CertificateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedBy?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    cid?: SortOrder
+    ipfsUri?: SortOrder
+    createdAt?: SortOrder
+    produceId?: SortOrder
+  }
+
+  export type CertificateMinOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedBy?: SortOrder
+    documentType?: SortOrder
+    fileName?: SortOrder
+    cid?: SortOrder
+    ipfsUri?: SortOrder
+    createdAt?: SortOrder
+    produceId?: SortOrder
+  }
+
+  export type EnumCertificateTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CertificateType | EnumCertificateTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCertificateTypeWithAggregatesFilter<$PrismaModel> | $Enums.CertificateType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCertificateTypeFilter<$PrismaModel>
+    _max?: NestedEnumCertificateTypeFilter<$PrismaModel>
   }
 
   export type ProduceCreateNestedManyWithoutFarmerInput = {
@@ -9141,10 +13759,24 @@ export namespace Prisma {
     connect?: ListingWhereUniqueInput
   }
 
+  export type CertificateCreateNestedManyWithoutProduceInput = {
+    create?: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput> | CertificateCreateWithoutProduceInput[] | CertificateUncheckedCreateWithoutProduceInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutProduceInput | CertificateCreateOrConnectWithoutProduceInput[]
+    createMany?: CertificateCreateManyProduceInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+  }
+
   export type ListingUncheckedCreateNestedOneWithoutProduceInput = {
     create?: XOR<ListingCreateWithoutProduceInput, ListingUncheckedCreateWithoutProduceInput>
     connectOrCreate?: ListingCreateOrConnectWithoutProduceInput
     connect?: ListingWhereUniqueInput
+  }
+
+  export type CertificateUncheckedCreateNestedManyWithoutProduceInput = {
+    create?: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput> | CertificateCreateWithoutProduceInput[] | CertificateUncheckedCreateWithoutProduceInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutProduceInput | CertificateCreateOrConnectWithoutProduceInput[]
+    createMany?: CertificateCreateManyProduceInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -9185,6 +13817,20 @@ export namespace Prisma {
     update?: XOR<XOR<ListingUpdateToOneWithWhereWithoutProduceInput, ListingUpdateWithoutProduceInput>, ListingUncheckedUpdateWithoutProduceInput>
   }
 
+  export type CertificateUpdateManyWithoutProduceNestedInput = {
+    create?: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput> | CertificateCreateWithoutProduceInput[] | CertificateUncheckedCreateWithoutProduceInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutProduceInput | CertificateCreateOrConnectWithoutProduceInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutProduceInput | CertificateUpsertWithWhereUniqueWithoutProduceInput[]
+    createMany?: CertificateCreateManyProduceInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutProduceInput | CertificateUpdateWithWhereUniqueWithoutProduceInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutProduceInput | CertificateUpdateManyWithWhereWithoutProduceInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+  }
+
   export type ListingUncheckedUpdateOneWithoutProduceNestedInput = {
     create?: XOR<ListingCreateWithoutProduceInput, ListingUncheckedCreateWithoutProduceInput>
     connectOrCreate?: ListingCreateOrConnectWithoutProduceInput
@@ -9193,6 +13839,20 @@ export namespace Prisma {
     delete?: ListingWhereInput | boolean
     connect?: ListingWhereUniqueInput
     update?: XOR<XOR<ListingUpdateToOneWithWhereWithoutProduceInput, ListingUpdateWithoutProduceInput>, ListingUncheckedUpdateWithoutProduceInput>
+  }
+
+  export type CertificateUncheckedUpdateManyWithoutProduceNestedInput = {
+    create?: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput> | CertificateCreateWithoutProduceInput[] | CertificateUncheckedCreateWithoutProduceInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutProduceInput | CertificateCreateOrConnectWithoutProduceInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutProduceInput | CertificateUpsertWithWhereUniqueWithoutProduceInput[]
+    createMany?: CertificateCreateManyProduceInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutProduceInput | CertificateUpdateWithWhereUniqueWithoutProduceInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutProduceInput | CertificateUpdateManyWithWhereWithoutProduceInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
   }
 
   export type ProduceCreateNestedOneWithoutListingInput = {
@@ -9361,6 +14021,12 @@ export namespace Prisma {
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutOfferInput, OrderUpdateWithoutOfferInput>, OrderUncheckedUpdateWithoutOfferInput>
   }
 
+  export type ShipmentCreateNestedOneWithoutOrderInput = {
+    create?: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutOrderInput
+    connect?: ShipmentWhereUniqueInput
+  }
+
   export type OfferCreateNestedOneWithoutOrderInput = {
     create?: XOR<OfferCreateWithoutOrderInput, OfferUncheckedCreateWithoutOrderInput>
     connectOrCreate?: OfferCreateOrConnectWithoutOrderInput
@@ -9385,8 +14051,24 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type ShipmentUncheckedCreateNestedOneWithoutOrderInput = {
+    create?: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutOrderInput
+    connect?: ShipmentWhereUniqueInput
+  }
+
   export type EnumOrderStatusFieldUpdateOperationsInput = {
     set?: $Enums.OrderStatus
+  }
+
+  export type ShipmentUpdateOneWithoutOrderNestedInput = {
+    create?: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutOrderInput
+    upsert?: ShipmentUpsertWithoutOrderInput
+    disconnect?: ShipmentWhereInput | boolean
+    delete?: ShipmentWhereInput | boolean
+    connect?: ShipmentWhereUniqueInput
+    update?: XOR<XOR<ShipmentUpdateToOneWithWhereWithoutOrderInput, ShipmentUpdateWithoutOrderInput>, ShipmentUncheckedUpdateWithoutOrderInput>
   }
 
   export type OfferUpdateOneRequiredWithoutOrderNestedInput = {
@@ -9419,6 +14101,116 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutFarmerOrdersInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFarmerOrdersInput, UserUpdateWithoutFarmerOrdersInput>, UserUncheckedUpdateWithoutFarmerOrdersInput>
+  }
+
+  export type ShipmentUncheckedUpdateOneWithoutOrderNestedInput = {
+    create?: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutOrderInput
+    upsert?: ShipmentUpsertWithoutOrderInput
+    disconnect?: ShipmentWhereInput | boolean
+    delete?: ShipmentWhereInput | boolean
+    connect?: ShipmentWhereUniqueInput
+    update?: XOR<XOR<ShipmentUpdateToOneWithWhereWithoutOrderInput, ShipmentUpdateWithoutOrderInput>, ShipmentUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type OrderCreateNestedOneWithoutShipmentInput = {
+    create?: XOR<OrderCreateWithoutShipmentInput, OrderUncheckedCreateWithoutShipmentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutShipmentInput
+    connect?: OrderWhereUniqueInput
+  }
+
+  export type TrackingEventCreateNestedManyWithoutShipmentInput = {
+    create?: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput> | TrackingEventCreateWithoutShipmentInput[] | TrackingEventUncheckedCreateWithoutShipmentInput[]
+    connectOrCreate?: TrackingEventCreateOrConnectWithoutShipmentInput | TrackingEventCreateOrConnectWithoutShipmentInput[]
+    createMany?: TrackingEventCreateManyShipmentInputEnvelope
+    connect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+  }
+
+  export type TrackingEventUncheckedCreateNestedManyWithoutShipmentInput = {
+    create?: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput> | TrackingEventCreateWithoutShipmentInput[] | TrackingEventUncheckedCreateWithoutShipmentInput[]
+    connectOrCreate?: TrackingEventCreateOrConnectWithoutShipmentInput | TrackingEventCreateOrConnectWithoutShipmentInput[]
+    createMany?: TrackingEventCreateManyShipmentInputEnvelope
+    connect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+  }
+
+  export type EnumShipmentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ShipmentStatus
+  }
+
+  export type OrderUpdateOneRequiredWithoutShipmentNestedInput = {
+    create?: XOR<OrderCreateWithoutShipmentInput, OrderUncheckedCreateWithoutShipmentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutShipmentInput
+    upsert?: OrderUpsertWithoutShipmentInput
+    connect?: OrderWhereUniqueInput
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutShipmentInput, OrderUpdateWithoutShipmentInput>, OrderUncheckedUpdateWithoutShipmentInput>
+  }
+
+  export type TrackingEventUpdateManyWithoutShipmentNestedInput = {
+    create?: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput> | TrackingEventCreateWithoutShipmentInput[] | TrackingEventUncheckedCreateWithoutShipmentInput[]
+    connectOrCreate?: TrackingEventCreateOrConnectWithoutShipmentInput | TrackingEventCreateOrConnectWithoutShipmentInput[]
+    upsert?: TrackingEventUpsertWithWhereUniqueWithoutShipmentInput | TrackingEventUpsertWithWhereUniqueWithoutShipmentInput[]
+    createMany?: TrackingEventCreateManyShipmentInputEnvelope
+    set?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    disconnect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    delete?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    connect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    update?: TrackingEventUpdateWithWhereUniqueWithoutShipmentInput | TrackingEventUpdateWithWhereUniqueWithoutShipmentInput[]
+    updateMany?: TrackingEventUpdateManyWithWhereWithoutShipmentInput | TrackingEventUpdateManyWithWhereWithoutShipmentInput[]
+    deleteMany?: TrackingEventScalarWhereInput | TrackingEventScalarWhereInput[]
+  }
+
+  export type TrackingEventUncheckedUpdateManyWithoutShipmentNestedInput = {
+    create?: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput> | TrackingEventCreateWithoutShipmentInput[] | TrackingEventUncheckedCreateWithoutShipmentInput[]
+    connectOrCreate?: TrackingEventCreateOrConnectWithoutShipmentInput | TrackingEventCreateOrConnectWithoutShipmentInput[]
+    upsert?: TrackingEventUpsertWithWhereUniqueWithoutShipmentInput | TrackingEventUpsertWithWhereUniqueWithoutShipmentInput[]
+    createMany?: TrackingEventCreateManyShipmentInputEnvelope
+    set?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    disconnect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    delete?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    connect?: TrackingEventWhereUniqueInput | TrackingEventWhereUniqueInput[]
+    update?: TrackingEventUpdateWithWhereUniqueWithoutShipmentInput | TrackingEventUpdateWithWhereUniqueWithoutShipmentInput[]
+    updateMany?: TrackingEventUpdateManyWithWhereWithoutShipmentInput | TrackingEventUpdateManyWithWhereWithoutShipmentInput[]
+    deleteMany?: TrackingEventScalarWhereInput | TrackingEventScalarWhereInput[]
+  }
+
+  export type ShipmentCreateNestedOneWithoutTrackingEventsInput = {
+    create?: XOR<ShipmentCreateWithoutTrackingEventsInput, ShipmentUncheckedCreateWithoutTrackingEventsInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutTrackingEventsInput
+    connect?: ShipmentWhereUniqueInput
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ShipmentUpdateOneRequiredWithoutTrackingEventsNestedInput = {
+    create?: XOR<ShipmentCreateWithoutTrackingEventsInput, ShipmentUncheckedCreateWithoutTrackingEventsInput>
+    connectOrCreate?: ShipmentCreateOrConnectWithoutTrackingEventsInput
+    upsert?: ShipmentUpsertWithoutTrackingEventsInput
+    connect?: ShipmentWhereUniqueInput
+    update?: XOR<XOR<ShipmentUpdateToOneWithWhereWithoutTrackingEventsInput, ShipmentUpdateWithoutTrackingEventsInput>, ShipmentUncheckedUpdateWithoutTrackingEventsInput>
+  }
+
+  export type ProduceCreateNestedOneWithoutCertificateInput = {
+    create?: XOR<ProduceCreateWithoutCertificateInput, ProduceUncheckedCreateWithoutCertificateInput>
+    connectOrCreate?: ProduceCreateOrConnectWithoutCertificateInput
+    connect?: ProduceWhereUniqueInput
+  }
+
+  export type EnumCertificateTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CertificateType
+  }
+
+  export type ProduceUpdateOneRequiredWithoutCertificateNestedInput = {
+    create?: XOR<ProduceCreateWithoutCertificateInput, ProduceUncheckedCreateWithoutCertificateInput>
+    connectOrCreate?: ProduceCreateOrConnectWithoutCertificateInput
+    upsert?: ProduceUpsertWithoutCertificateInput
+    connect?: ProduceWhereUniqueInput
+    update?: XOR<XOR<ProduceUpdateToOneWithWhereWithoutCertificateInput, ProduceUpdateWithoutCertificateInput>, ProduceUncheckedUpdateWithoutCertificateInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9667,6 +14459,67 @@ export namespace Prisma {
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumShipmentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShipmentStatus | EnumShipmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumShipmentStatusFilter<$PrismaModel> | $Enums.ShipmentStatus
+  }
+
+  export type NestedEnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShipmentStatus | EnumShipmentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ShipmentStatus[] | ListEnumShipmentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumShipmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ShipmentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShipmentStatusFilter<$PrismaModel>
+    _max?: NestedEnumShipmentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCertificateTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CertificateType | EnumCertificateTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCertificateTypeFilter<$PrismaModel> | $Enums.CertificateType
+  }
+
+  export type NestedEnumCertificateTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CertificateType | EnumCertificateTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CertificateType[] | ListEnumCertificateTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCertificateTypeWithAggregatesFilter<$PrismaModel> | $Enums.CertificateType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCertificateTypeFilter<$PrismaModel>
+    _max?: NestedEnumCertificateTypeFilter<$PrismaModel>
+  }
+
   export type ProduceCreateWithoutFarmerInput = {
     id?: string
     cropName: string
@@ -9677,6 +14530,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     listing?: ListingCreateNestedOneWithoutProduceInput
+    certificate?: CertificateCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceUncheckedCreateWithoutFarmerInput = {
@@ -9689,6 +14543,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     listing?: ListingUncheckedCreateNestedOneWithoutProduceInput
+    certificate?: CertificateUncheckedCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceCreateOrConnectWithoutFarmerInput = {
@@ -9743,6 +14598,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentCreateNestedOneWithoutOrderInput
     offer: OfferCreateNestedOneWithoutOrderInput
     listing: ListingCreateNestedOneWithoutOrdersInput
     farmer: UserCreateNestedOneWithoutFarmerOrdersInput
@@ -9759,6 +14615,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentUncheckedCreateNestedOneWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutBuyerInput = {
@@ -9779,6 +14636,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentCreateNestedOneWithoutOrderInput
     offer: OfferCreateNestedOneWithoutOrderInput
     listing: ListingCreateNestedOneWithoutOrdersInput
     buyer: UserCreateNestedOneWithoutBuyerOrdersInput
@@ -9795,6 +14653,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentUncheckedCreateNestedOneWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutFarmerInput = {
@@ -9976,6 +14835,36 @@ export namespace Prisma {
     create: XOR<ListingCreateWithoutProduceInput, ListingUncheckedCreateWithoutProduceInput>
   }
 
+  export type CertificateCreateWithoutProduceInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+  }
+
+  export type CertificateUncheckedCreateWithoutProduceInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+  }
+
+  export type CertificateCreateOrConnectWithoutProduceInput = {
+    where: CertificateWhereUniqueInput
+    create: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput>
+  }
+
+  export type CertificateCreateManyProduceInputEnvelope = {
+    data: CertificateCreateManyProduceInput | CertificateCreateManyProduceInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProduceInput = {
     update: XOR<UserUpdateWithoutProduceInput, UserUncheckedUpdateWithoutProduceInput>
     create: XOR<UserCreateWithoutProduceInput, UserUncheckedCreateWithoutProduceInput>
@@ -10046,6 +14935,36 @@ export namespace Prisma {
     orders?: OrderUncheckedUpdateManyWithoutListingNestedInput
   }
 
+  export type CertificateUpsertWithWhereUniqueWithoutProduceInput = {
+    where: CertificateWhereUniqueInput
+    update: XOR<CertificateUpdateWithoutProduceInput, CertificateUncheckedUpdateWithoutProduceInput>
+    create: XOR<CertificateCreateWithoutProduceInput, CertificateUncheckedCreateWithoutProduceInput>
+  }
+
+  export type CertificateUpdateWithWhereUniqueWithoutProduceInput = {
+    where: CertificateWhereUniqueInput
+    data: XOR<CertificateUpdateWithoutProduceInput, CertificateUncheckedUpdateWithoutProduceInput>
+  }
+
+  export type CertificateUpdateManyWithWhereWithoutProduceInput = {
+    where: CertificateScalarWhereInput
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyWithoutProduceInput>
+  }
+
+  export type CertificateScalarWhereInput = {
+    AND?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    OR?: CertificateScalarWhereInput[]
+    NOT?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    uploadedBy?: StringFilter<"Certificate"> | string
+    documentType?: EnumCertificateTypeFilter<"Certificate"> | $Enums.CertificateType
+    fileName?: StringFilter<"Certificate"> | string
+    cid?: StringFilter<"Certificate"> | string
+    ipfsUri?: StringFilter<"Certificate"> | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    produceId?: StringFilter<"Certificate"> | string
+  }
+
   export type ProduceCreateWithoutListingInput = {
     id?: string
     cropName: string
@@ -10056,6 +14975,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     farmer: UserCreateNestedOneWithoutProduceInput
+    certificate?: CertificateCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceUncheckedCreateWithoutListingInput = {
@@ -10068,6 +14988,7 @@ export namespace Prisma {
     harvestDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    certificate?: CertificateUncheckedCreateNestedManyWithoutProduceInput
   }
 
   export type ProduceCreateOrConnectWithoutListingInput = {
@@ -10117,6 +15038,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentCreateNestedOneWithoutOrderInput
     offer: OfferCreateNestedOneWithoutOrderInput
     buyer: UserCreateNestedOneWithoutBuyerOrdersInput
     farmer: UserCreateNestedOneWithoutFarmerOrdersInput
@@ -10133,6 +15055,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentUncheckedCreateNestedOneWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutListingInput = {
@@ -10166,6 +15089,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     farmer?: UserUpdateOneRequiredWithoutProduceNestedInput
+    certificate?: CertificateUpdateManyWithoutProduceNestedInput
   }
 
   export type ProduceUncheckedUpdateWithoutListingInput = {
@@ -10178,6 +15102,7 @@ export namespace Prisma {
     harvestDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    certificate?: CertificateUncheckedUpdateManyWithoutProduceNestedInput
   }
 
   export type OfferUpsertWithWhereUniqueWithoutListingInput = {
@@ -10220,6 +15145,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentCreateNestedOneWithoutOrderInput
     listing: ListingCreateNestedOneWithoutOrdersInput
     buyer: UserCreateNestedOneWithoutBuyerOrdersInput
     farmer: UserCreateNestedOneWithoutFarmerOrdersInput
@@ -10236,6 +15162,7 @@ export namespace Prisma {
     status?: $Enums.OrderStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    shipment?: ShipmentUncheckedCreateNestedOneWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutOfferInput = {
@@ -10320,6 +15247,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneWithoutOrderNestedInput
     listing?: ListingUpdateOneRequiredWithoutOrdersNestedInput
     buyer?: UserUpdateOneRequiredWithoutBuyerOrdersNestedInput
     farmer?: UserUpdateOneRequiredWithoutFarmerOrdersNestedInput
@@ -10336,6 +15264,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUncheckedUpdateOneWithoutOrderNestedInput
   }
 
   export type ListingUpsertWithoutOffersInput = {
@@ -10406,6 +15335,39 @@ export namespace Prisma {
     produce?: ProduceUncheckedUpdateManyWithoutFarmerNestedInput
     buyerOrders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     farmerOrders?: OrderUncheckedUpdateManyWithoutFarmerNestedInput
+  }
+
+  export type ShipmentCreateWithoutOrderInput = {
+    id?: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trackingEvents?: TrackingEventCreateNestedManyWithoutShipmentInput
+  }
+
+  export type ShipmentUncheckedCreateWithoutOrderInput = {
+    id?: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutShipmentInput
+  }
+
+  export type ShipmentCreateOrConnectWithoutOrderInput = {
+    where: ShipmentWhereUniqueInput
+    create: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
   }
 
   export type OfferCreateWithoutOrderInput = {
@@ -10524,6 +15486,45 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutFarmerOrdersInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutFarmerOrdersInput, UserUncheckedCreateWithoutFarmerOrdersInput>
+  }
+
+  export type ShipmentUpsertWithoutOrderInput = {
+    update: XOR<ShipmentUpdateWithoutOrderInput, ShipmentUncheckedUpdateWithoutOrderInput>
+    create: XOR<ShipmentCreateWithoutOrderInput, ShipmentUncheckedCreateWithoutOrderInput>
+    where?: ShipmentWhereInput
+  }
+
+  export type ShipmentUpdateToOneWithWhereWithoutOrderInput = {
+    where?: ShipmentWhereInput
+    data: XOR<ShipmentUpdateWithoutOrderInput, ShipmentUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type ShipmentUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trackingEvents?: TrackingEventUpdateManyWithoutShipmentNestedInput
+  }
+
+  export type ShipmentUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trackingEvents?: TrackingEventUncheckedUpdateManyWithoutShipmentNestedInput
   }
 
   export type OfferUpsertWithoutOrderInput = {
@@ -10668,6 +15669,278 @@ export namespace Prisma {
     buyerOrders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
+  export type OrderCreateWithoutShipmentInput = {
+    id?: string
+    quantity: number
+    agreedPrice: number
+    totalAmount: number
+    status?: $Enums.OrderStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    offer: OfferCreateNestedOneWithoutOrderInput
+    listing: ListingCreateNestedOneWithoutOrdersInput
+    buyer: UserCreateNestedOneWithoutBuyerOrdersInput
+    farmer: UserCreateNestedOneWithoutFarmerOrdersInput
+  }
+
+  export type OrderUncheckedCreateWithoutShipmentInput = {
+    id?: string
+    offerId: string
+    listingId: string
+    buyerId: string
+    farmerId: string
+    quantity: number
+    agreedPrice: number
+    totalAmount: number
+    status?: $Enums.OrderStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrderCreateOrConnectWithoutShipmentInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutShipmentInput, OrderUncheckedCreateWithoutShipmentInput>
+  }
+
+  export type TrackingEventCreateWithoutShipmentInput = {
+    id?: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+  }
+
+  export type TrackingEventUncheckedCreateWithoutShipmentInput = {
+    id?: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+  }
+
+  export type TrackingEventCreateOrConnectWithoutShipmentInput = {
+    where: TrackingEventWhereUniqueInput
+    create: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput>
+  }
+
+  export type TrackingEventCreateManyShipmentInputEnvelope = {
+    data: TrackingEventCreateManyShipmentInput | TrackingEventCreateManyShipmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrderUpsertWithoutShipmentInput = {
+    update: XOR<OrderUpdateWithoutShipmentInput, OrderUncheckedUpdateWithoutShipmentInput>
+    create: XOR<OrderCreateWithoutShipmentInput, OrderUncheckedCreateWithoutShipmentInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutShipmentInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutShipmentInput, OrderUncheckedUpdateWithoutShipmentInput>
+  }
+
+  export type OrderUpdateWithoutShipmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    agreedPrice?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    offer?: OfferUpdateOneRequiredWithoutOrderNestedInput
+    listing?: ListingUpdateOneRequiredWithoutOrdersNestedInput
+    buyer?: UserUpdateOneRequiredWithoutBuyerOrdersNestedInput
+    farmer?: UserUpdateOneRequiredWithoutFarmerOrdersNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutShipmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    offerId?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    farmerId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    agreedPrice?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventUpsertWithWhereUniqueWithoutShipmentInput = {
+    where: TrackingEventWhereUniqueInput
+    update: XOR<TrackingEventUpdateWithoutShipmentInput, TrackingEventUncheckedUpdateWithoutShipmentInput>
+    create: XOR<TrackingEventCreateWithoutShipmentInput, TrackingEventUncheckedCreateWithoutShipmentInput>
+  }
+
+  export type TrackingEventUpdateWithWhereUniqueWithoutShipmentInput = {
+    where: TrackingEventWhereUniqueInput
+    data: XOR<TrackingEventUpdateWithoutShipmentInput, TrackingEventUncheckedUpdateWithoutShipmentInput>
+  }
+
+  export type TrackingEventUpdateManyWithWhereWithoutShipmentInput = {
+    where: TrackingEventScalarWhereInput
+    data: XOR<TrackingEventUpdateManyMutationInput, TrackingEventUncheckedUpdateManyWithoutShipmentInput>
+  }
+
+  export type TrackingEventScalarWhereInput = {
+    AND?: TrackingEventScalarWhereInput | TrackingEventScalarWhereInput[]
+    OR?: TrackingEventScalarWhereInput[]
+    NOT?: TrackingEventScalarWhereInput | TrackingEventScalarWhereInput[]
+    id?: StringFilter<"TrackingEvent"> | string
+    shipmentId?: StringFilter<"TrackingEvent"> | string
+    status?: EnumShipmentStatusFilter<"TrackingEvent"> | $Enums.ShipmentStatus
+    location?: StringFilter<"TrackingEvent"> | string
+    description?: StringNullableFilter<"TrackingEvent"> | string | null
+    latitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    longitude?: FloatNullableFilter<"TrackingEvent"> | number | null
+    createdAt?: DateTimeFilter<"TrackingEvent"> | Date | string
+  }
+
+  export type ShipmentCreateWithoutTrackingEventsInput = {
+    id?: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    order: OrderCreateNestedOneWithoutShipmentInput
+  }
+
+  export type ShipmentUncheckedCreateWithoutTrackingEventsInput = {
+    id?: string
+    orderId: string
+    carrier?: string | null
+    trackingNumber: string
+    pickupLocation: string
+    deliveryLocation: string
+    currentLocation?: string | null
+    status?: $Enums.ShipmentStatus
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ShipmentCreateOrConnectWithoutTrackingEventsInput = {
+    where: ShipmentWhereUniqueInput
+    create: XOR<ShipmentCreateWithoutTrackingEventsInput, ShipmentUncheckedCreateWithoutTrackingEventsInput>
+  }
+
+  export type ShipmentUpsertWithoutTrackingEventsInput = {
+    update: XOR<ShipmentUpdateWithoutTrackingEventsInput, ShipmentUncheckedUpdateWithoutTrackingEventsInput>
+    create: XOR<ShipmentCreateWithoutTrackingEventsInput, ShipmentUncheckedCreateWithoutTrackingEventsInput>
+    where?: ShipmentWhereInput
+  }
+
+  export type ShipmentUpdateToOneWithWhereWithoutTrackingEventsInput = {
+    where?: ShipmentWhereInput
+    data: XOR<ShipmentUpdateWithoutTrackingEventsInput, ShipmentUncheckedUpdateWithoutTrackingEventsInput>
+  }
+
+  export type ShipmentUpdateWithoutTrackingEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneRequiredWithoutShipmentNestedInput
+  }
+
+  export type ShipmentUncheckedUpdateWithoutTrackingEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    pickupLocation?: StringFieldUpdateOperationsInput | string
+    deliveryLocation?: StringFieldUpdateOperationsInput | string
+    currentLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProduceCreateWithoutCertificateInput = {
+    id?: string
+    cropName: string
+    quantity: number
+    unit: $Enums.ProduceUnit
+    quality?: string | null
+    harvestDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    farmer: UserCreateNestedOneWithoutProduceInput
+    listing?: ListingCreateNestedOneWithoutProduceInput
+  }
+
+  export type ProduceUncheckedCreateWithoutCertificateInput = {
+    id?: string
+    farmerId: string
+    cropName: string
+    quantity: number
+    unit: $Enums.ProduceUnit
+    quality?: string | null
+    harvestDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    listing?: ListingUncheckedCreateNestedOneWithoutProduceInput
+  }
+
+  export type ProduceCreateOrConnectWithoutCertificateInput = {
+    where: ProduceWhereUniqueInput
+    create: XOR<ProduceCreateWithoutCertificateInput, ProduceUncheckedCreateWithoutCertificateInput>
+  }
+
+  export type ProduceUpsertWithoutCertificateInput = {
+    update: XOR<ProduceUpdateWithoutCertificateInput, ProduceUncheckedUpdateWithoutCertificateInput>
+    create: XOR<ProduceCreateWithoutCertificateInput, ProduceUncheckedCreateWithoutCertificateInput>
+    where?: ProduceWhereInput
+  }
+
+  export type ProduceUpdateToOneWithWhereWithoutCertificateInput = {
+    where?: ProduceWhereInput
+    data: XOR<ProduceUpdateWithoutCertificateInput, ProduceUncheckedUpdateWithoutCertificateInput>
+  }
+
+  export type ProduceUpdateWithoutCertificateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cropName?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumProduceUnitFieldUpdateOperationsInput | $Enums.ProduceUnit
+    quality?: NullableStringFieldUpdateOperationsInput | string | null
+    harvestDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    farmer?: UserUpdateOneRequiredWithoutProduceNestedInput
+    listing?: ListingUpdateOneWithoutProduceNestedInput
+  }
+
+  export type ProduceUncheckedUpdateWithoutCertificateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    farmerId?: StringFieldUpdateOperationsInput | string
+    cropName?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumProduceUnitFieldUpdateOperationsInput | $Enums.ProduceUnit
+    quality?: NullableStringFieldUpdateOperationsInput | string | null
+    harvestDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: ListingUncheckedUpdateOneWithoutProduceNestedInput
+  }
+
   export type ProduceCreateManyFarmerInput = {
     id?: string
     cropName: string
@@ -10726,6 +15999,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listing?: ListingUpdateOneWithoutProduceNestedInput
+    certificate?: CertificateUpdateManyWithoutProduceNestedInput
   }
 
   export type ProduceUncheckedUpdateWithoutFarmerInput = {
@@ -10738,6 +16012,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listing?: ListingUncheckedUpdateOneWithoutProduceNestedInput
+    certificate?: CertificateUncheckedUpdateManyWithoutProduceNestedInput
   }
 
   export type ProduceUncheckedUpdateManyWithoutFarmerInput = {
@@ -10794,6 +16069,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneWithoutOrderNestedInput
     offer?: OfferUpdateOneRequiredWithoutOrderNestedInput
     listing?: ListingUpdateOneRequiredWithoutOrdersNestedInput
     farmer?: UserUpdateOneRequiredWithoutFarmerOrdersNestedInput
@@ -10810,6 +16086,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUncheckedUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutBuyerInput = {
@@ -10833,6 +16110,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneWithoutOrderNestedInput
     offer?: OfferUpdateOneRequiredWithoutOrderNestedInput
     listing?: ListingUpdateOneRequiredWithoutOrdersNestedInput
     buyer?: UserUpdateOneRequiredWithoutBuyerOrdersNestedInput
@@ -10849,6 +16127,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUncheckedUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutFarmerInput = {
@@ -10862,6 +16141,46 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateCreateManyProduceInput = {
+    id?: string
+    uploadedBy: string
+    documentType: $Enums.CertificateType
+    fileName: string
+    cid: string
+    ipfsUri: string
+    createdAt?: Date | string
+  }
+
+  export type CertificateUpdateWithoutProduceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateWithoutProduceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyWithoutProduceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedBy?: StringFieldUpdateOperationsInput | string
+    documentType?: EnumCertificateTypeFieldUpdateOperationsInput | $Enums.CertificateType
+    fileName?: StringFieldUpdateOperationsInput | string
+    cid?: StringFieldUpdateOperationsInput | string
+    ipfsUri?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OfferCreateManyListingInput = {
@@ -10931,6 +16250,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUpdateOneWithoutOrderNestedInput
     offer?: OfferUpdateOneRequiredWithoutOrderNestedInput
     buyer?: UserUpdateOneRequiredWithoutBuyerOrdersNestedInput
     farmer?: UserUpdateOneRequiredWithoutFarmerOrdersNestedInput
@@ -10947,6 +16267,7 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shipment?: ShipmentUncheckedUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutListingInput = {
@@ -10960,6 +16281,46 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventCreateManyShipmentInput = {
+    id?: string
+    status: $Enums.ShipmentStatus
+    location: string
+    description?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+  }
+
+  export type TrackingEventUpdateWithoutShipmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventUncheckedUpdateWithoutShipmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackingEventUncheckedUpdateManyWithoutShipmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
