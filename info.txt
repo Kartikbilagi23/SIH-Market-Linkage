@@ -1,0 +1,38 @@
+auth
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+
+produce
+
+POST   /api/produce
+GET    /api/produce/my (farmer read only)
+GET    /api/produce/:id 
+PATCH  /api/produce/:id (for crud)
+DELETE /api/produce/:id
+
+
+listings
+POST   /api/listings
+GET    /api/listings
+GET    /api/listings/:id
+PATCH  /api/listings/:id
+DELETE /api/listings/:id
+
+orders
+POST  /api/orders
+GET   /api/orders/my
+GET   /api/orders/:id
+PATCH /api/orders/:id/status
+
+Listing
+   │
+   ├── ACTIVE
+   └── INACTIVE
+
+PENDING
+   │
+   ├── ACCEPTED
+   ├── REJECTED
+   └── COMPLETED
+
